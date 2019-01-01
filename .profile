@@ -26,5 +26,13 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+function map_tablet {
+    xsetwacom --list devices
+    read -p "Type in pen id: " id
+    xrandr query
+    read -p "Display to map to: " ans
+    xsetwacom set $id MapToOutput $ans
+}
+
 PATH="$HOME/.local/node-v11.3.0-linux-x64/bin:$PATH"
 
