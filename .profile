@@ -29,10 +29,9 @@ fi
 function map_tablet {
     xsetwacom --list devices
     read -p "Type in pen id: " id
-    xrandr query
+    xrandr -q
     read -p "Display to map to: " ans
     xsetwacom set $id MapToOutput $ans
 }
 
-PATH="$HOME/.local/node-v11.3.0-linux-x64/bin:$PATH"
 
