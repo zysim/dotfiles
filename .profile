@@ -26,6 +26,9 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+# set PATH to include mine scripts personal
+PATH="$PATH:`pwd`/scripts"
+
 function map_tablet {
     xsetwacom --list devices
     read -p "Type in pen id: " id

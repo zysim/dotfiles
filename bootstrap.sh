@@ -8,10 +8,10 @@ cd $BASE
 sudo echo
 
 # Making symlinks
-ln -s ~/.bash_aliases "$BASE/.bash_aliases"
-ln -s ~/.bash_profile "$BASE/.bash_profile"
-ln -s ~/.profile "$BASE/.profile"
-ln -s ~/.gitignore "$BASE/.gitignore"
+ln -nfs ~/.bash_aliases "$BASE/.bash_aliases"
+ln -nfs ~/.bash_profile "$BASE/.bash_profile"
+ln -nfs ~/.profile "$BASE/.profile"
+ln -nfs ~/.gitignore "$BASE/.gitignore"
 
 echo "Stuff moved to $BASE, and symlinks all made"
 

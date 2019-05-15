@@ -10,12 +10,12 @@ elif [[ $OSTYPE == darwin* ]]; then
     alias pr="git remote prune origin"
 fi
 alias mg="git merge"
-alias mgd="mg develop"
+alias mgd='git merge develop'
 function cip() {
     if [[ -z "$1" ]]; then
         ci -a && git push
     else
-        ci -a -m "$1" && git push
+        git add . && ci -m "$1" && git push
     fi
 }
 function nuke_node() {
