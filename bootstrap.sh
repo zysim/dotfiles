@@ -8,10 +8,10 @@ cd $BASE
 sudo echo
 
 # Making symlinks
-ln -s ~/.bash_aliases "$BASE/.bash_aliases"
-ln -s ~/.bash_profile "$BASE/.bash_profile"
-ln -s ~/.profile "$BASE/.profile"
-ln -s ~/.gitignore "$BASE/.gitignore"
+ln -nfs "$BASE/.bash_aliases" ~/.bash_aliases
+ln -nfs "$BASE/.bash_profile" ~/.bash_profile
+ln -nfs "$BASE/.profile" ~/.profile
+ln -nfs "$BASE/.gitignore" ~/.gitignore
 
 echo "Stuff moved to $BASE, and symlinks all made"
 
@@ -19,14 +19,14 @@ echo "Stuff moved to $BASE, and symlinks all made"
 echo "Checking if git's installed..."
 if ! [ -x "`command -v git`" ]; then
 	echo "Installing git..."
-	apt install -y git
+	sudo apt install -y git
 fi
 
 # Check if vim's installed
 echo "Checking if vim's installed..."
 if ! [ -x "`command -v vim`" ]; then
 	echo "Installing vim..."
-	apt install -y vim
+	sudo apt install -y vim
 fi
 
 # Setting git stuff
@@ -52,7 +52,7 @@ ln -s ~/.vim_runtime "$BASE/.vim_runtime"
 . $BASE/.vim_runtime/install_awesome_vimrc.sh
 
 # Download Node
-curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 if ! [[ -z "`nvm --version`" ]]; then
 	nvm install node
 else

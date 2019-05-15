@@ -17,3 +17,8 @@ function dev() {
 		fi
 	fi
 }
+
+alias list_pen_id="xsetwacom list --devices"
+# Map my tablet. ID could change.
+# If in doubt, run list_pen_id
+alias map_tablet="xsetwacom set 10 MapToOutput 'HDMI-2'"
