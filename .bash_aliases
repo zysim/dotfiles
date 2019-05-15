@@ -10,12 +10,12 @@ elif [[ $OSTYPE == darwin* ]]; then
     alias pr="git remote prune origin"
 fi
 alias mg="git merge"
-alias mgd="mg develop"
+alias mgd='git merge develop'
 function cip() {
     if [[ -z "$1" ]]; then
         ci -a && git push
     else
-        ci -a -m "$1" && git push
+        git add . && ci -m "$1" && git push
     fi
 }
 function nuke_node() {
@@ -67,6 +67,10 @@ function br_new () {
 # rm aliases cuz goddamn
 alias rm="rm -i"
 alias srm="srm -i"
+
+# ls aliases
+alias ll="ls -ahl"
+alias l="ls -AF"
 
 # This is for work at Radweb. Once I'm outta this place then just delete this
 # Opens the debugging menu on the test Android phone
