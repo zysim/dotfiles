@@ -11,9 +11,10 @@ elif [[ $OSTYPE == darwin* ]]; then
 fi
 alias mg="git merge"
 alias mgd='git merge develop'
+alias pull='git fetch origin && git rebase -p origin/$(git_current_branch)'
 function cip() {
     if [[ -z "$1" ]]; then
-        ci -a && git push
+        git add . && git push
     else
         git add . && ci -m "$1" && git push
     fi
@@ -51,10 +52,6 @@ function bdm() {
         echo "Aborting..."
     fi
 }
-alias list_pen_id="xsetwacom list --devices"
-# Map my tablet. ID could change.
-# If in doubt, run list_pen_id
-alias map_tablet="xsetwacom set 10 MapToOutput 'HDMI-2'"
 
 # Shorthand to checkout to a new branch from another
 function br_new () {
@@ -74,7 +71,7 @@ alias rm="rm -i"
 alias srm="srm -i"
 
 # ls aliases
-alias ll="ls -ahl"
+alias ll="ls -ahlF"
 alias l="ls -AF"
 
 # This is for work at Radweb. Once I'm outta this place then just delete this

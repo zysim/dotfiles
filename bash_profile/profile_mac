@@ -2,20 +2,14 @@
 
 export CLICOLOR=true
 
-if [[ -e ~/.bash_aliases ]]; then
-    . ~/.bash_aliases
-fi
-
-# Source NVM
-if [[ -z `command -v nvm` ]]; then
-    if [[ -d ~/.nvm ]]; then
-        . ~/.nvm/nvm.sh
-    else
-        echo "NVM directory not found. Do you have it installed?"
+# if running bash
+if [ -n "$BASH_VERSION" ]; then
+    # include .bashrc if it exists
+    if [ -f "$HOME/.bashrc" ]; then
+	    . "$HOME/.bashrc"
     fi
 fi
 
 export PATH=$HOME/Library/Android/sdk/tools:$PATH
 export PATH=$HOME/Library/Android/sdk/tools/bin:$PATH
 export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
-export PATH=$PATH:~/.mine_dotfiles/scripts

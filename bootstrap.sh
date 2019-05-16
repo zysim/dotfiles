@@ -13,7 +13,9 @@ case $BASE in
     linux*     ) ln -nfs "$BASE/bash_profile/profile_linux" ~/.bash_profile;;
     [dD]arwin* ) ln -nfs "$BASE/bash_profile/profile_mac" ~/.bash_profile;;
 esac
-ln -nfs ~/.gitignore "$BASE/.gitignore"
+ln -nfs "$BASE/.bashrc" ~/.bashrc
+ln -nfs "$BASE/.gitignore" ~/.gitignore
+chmod u+x $BASE/scripts/*
 
 echo "Stuff moved to $BASE, and symlinks all made"
 
