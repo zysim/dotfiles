@@ -1,0 +1,12 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Sim
+    email = zhongyuen@radweb.co.uk
+
+[core]
+    editor = vim
+    excludesfile = ~/.gitignore
+    # Make git rebase safer on MacOS
+    # More info: <http://www.git-tower.com/blog/make-git-rebase-safe-on-osx/>
+    trustctime = false

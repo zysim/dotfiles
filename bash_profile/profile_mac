@@ -2,14 +2,73 @@
 
 export CLICOLOR=true
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	    . "$HOME/.bashrc"
+# Source NVM
+if [[ -z `command -v nvm` ]]; then
+    if [[ -d ~/.nvm ]]; then
+        . ~/.nvm/nvm.sh
+    else
+        echo "NVM directory not found. Do you have it installed?"
+    fi
+else
+    if [[ -f .nvmrc ]]; then
+        nvm use --silent
     fi
 fi
 
-export PATH=$HOME/Library/Android/sdk/tools:$PATH
-export PATH=$HOME/Library/Android/sdk/tools/bin:$PATH
-export PATH=$HOME/Library/Android/sdk/platform-tools:$PATH
+# Load Aliases
+if [[ -e ~/.bash_aliases ]]; then
+    . ~/.bash_aliases
+fi
+
+alias launch_emulator='emulator @Nexus_5X_API_27'
+
+function kickstart() {
+    set -e
+    case $1 in
+        m1)
+            ib
+            nvm use --silent
+            vagrant up
+            ngrok http 8000 --host-header=ib.api
+            ;;
+        m2)
+            ibr && nvm use --silent && yarn start
+            ;;
+        m3)
+            ibr
+            nvm use --silent
+            local id=$(adb devices -l | grep usb | perl -lane 'print m/^[\d\w]+?\b/g')
+	        if [ -n $id ]; then
+		        adb -s $id reverse tcp:8081 tcp:8081
+		        react-native run-android --deviceId $id
+	        else
+                launch_emulator &
+                react-native run-android
+	        fi
+	        adb logcat | grep ReactNativeJS
+            ;;
+        1)
+            ib
+            nvm use --silent
+            vagrant up
+            vagrant ssh
+            cd code
+            ;;
+        2)
+            ib && nvm use --silent && npm start
+            ;;
+        *)
+            echo "Didn't understand $1. Do it again."
+            ;;
+    esac
+}
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+export PATH=$PATH:~/.mine_dotfiles/scripts
+

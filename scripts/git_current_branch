@@ -1,8 +1,6 @@
 #!/bin/sh
 
 # Print the current Git branch.
-#
-# AUTHOR:
-#  Geoffrey Grosenbach http://peepcode.com
+# Source: https://tinyurl.com/y2furb8c
 
-git symbolic-ref -q HEAD | sed -e 's|^refs/heads/||'
+git rev-parse --abbrev-ref HEAD
