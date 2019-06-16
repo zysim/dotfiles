@@ -129,9 +129,9 @@ alias ll="ls -ahl"
 alias l="ls -AF"
 
 # Tablet aliases
-alias tablet_list='xsetwacom --list devices'
 function fuckin_pen() {
-    xsetwacom set $1 MapToOutput 'HDMI-2'
+    id=$(xsetwacom --list devices | perl -nle 'print $1 if /id: (\d{2})\s+type: STYLUS/')
+    xsetwacom set $id MapToOutput 'HDMI-2'
 }
 
 # This is for work at Radweb. Once I'm outta this place then just delete this
