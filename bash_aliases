@@ -1,5 +1,6 @@
 #!/usr/bin/bash
-set -e
+Y='\033[1;33m'
+NC='\033[0m'
 
 # IB aliases
 alias ib='cd ~/Documents/Work/InventoryBase'
@@ -81,7 +82,12 @@ function dev() {
             # Use the user-supplied branch to co to
             current_branch=$1
         fi
-        co develop && pull && co $current_branch && mgd
+        if [[ $(git_current_branch) == "develop" ]]; then
+            echo -e "${Y}Already on develop. Pulling...${NC}"
+            pull
+        else
+            co develop && pull && co $current_branch && mgd
+        fi
         if [[ "$2" == "-p" ]]; then
             push
         fi
@@ -121,6 +127,12 @@ alias srm="srm -i"
 # ls aliases
 alias ll="ls -ahl"
 alias l="ls -AF"
+
+# Tablet aliases
+alias tablet_list='xsetwacom --list devices'
+function fuckin_pen() {
+    xsetwacom set $1 MapToOutput 'HDMI-2'
+}
 
 # This is for work at Radweb. Once I'm outta this place then just delete this
 # Opens the debugging menu on the test Android phone

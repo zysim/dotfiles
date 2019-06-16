@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# Print the current Git branch.
-# Source: https://tinyurl.com/y2furb8c
-
-git rev-parse --abbrev-ref HEAD
