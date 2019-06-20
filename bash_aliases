@@ -152,8 +152,15 @@ function nuke_node() {
         exit 1
     fi
     read -p "You sure you want to nuke node_modules? [y/N]" ans
-    if [[ $ans =~ "[yY]" ]]; then
-        rm -rf node_modules && npm i
+    if [[ $ans =~ [yY] ]]; then
+        rm -rf node_modules
+        if [[ $(pwd) =~ InventoryBase-Go-RN$ ]]; then
+            yarn
+        else
+            npm i
+        fi
+    elif [[ -z $ans ]]; then
+        echo 'N received. Not nuking.'
     else
         echo "$ans received. Not nuking."
     fi
