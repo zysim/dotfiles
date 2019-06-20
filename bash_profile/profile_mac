@@ -23,7 +23,6 @@ fi
 alias launch_emulator='emulator @Nexus_5X_API_27'
 
 function kickstart() {
-    set -e
     case $1 in
         m1)
             ib
