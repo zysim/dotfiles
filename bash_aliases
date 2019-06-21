@@ -112,10 +112,10 @@ function dev() {
             git rev-parse --verify $1 &>/dev/null
             if [[ $? == 0 ]]; then
                 # Create a new branch
-                create_new_branch=1
+                create_new_branch=0
             else
                 # Use the user-supplied branch to co to
-                create_new_branch=0
+                create_new_branch=1
             fi
             current_branch=$1
         fi
