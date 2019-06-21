@@ -100,6 +100,15 @@ function cob() {
     fi
 }
 
+function del() {
+    local current_branch=$(git_current_branch)
+    if ! [[ $current_branch =~ (master|develop) ]]; then
+        br -D $current_branch
+    else
+        echo -e "${LR}Currently on $current_branch. Not deleting this.${NC}"
+    fi
+}
+
 function dev() {
     local current_branch
     local create_new_branch
