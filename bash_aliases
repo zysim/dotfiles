@@ -132,7 +132,7 @@ function dev() {
         if [[ $create_new_branch == 1 ]]; then
             echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
             co -b $1 && mgd
-        elif [[ $(git_current_branch) != "develop" ]]; then
+        elif [[ $current_branch != "develop" ]]; then
             co $current_branch && mgd
         fi
         if [[ "$2" == "-p" ]]; then
