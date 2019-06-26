@@ -52,11 +52,19 @@ fi
 alias ss='git status -sb'
 
 # Git functions
+function acidev() {
+    if [ -n "$1" ]; then
+        add && ci -m "$1" && dev
+    else
+        add && ci && dev
+    fi
+}
+
 function acidevp() {
     if [ -n "$1" ]; then
-        add && ci -m "$1" && dev -p
+        acidev $1 && push
     else
-        add && ci && dev -p
+        acidev && push
     fi
 }
 
@@ -68,6 +76,15 @@ function bdm() {
     else
         echo "Aborting..."
     fi
+}
+
+# Delete local branches which remotes have been deleted
+function begone_thots() {
+    git branch -v \
+    | grep -E '\[gone\]' \
+    | cut -c 3- \
+    | perl -lane 'print m/^\w+?\b/g' \
+    | xargs git branch -D
 }
 
 # Commits and pushes at once
@@ -103,7 +120,7 @@ function cob() {
 function del() {
     local current_branch=$(git_current_branch)
     if ! [[ $current_branch =~ (master|develop) ]]; then
-        br -D $current_branch
+        dev -s && br -D $current_branch
     else
         echo -e "${LR}Currently on $current_branch. Not deleting this.${NC}"
     fi
@@ -138,19 +155,20 @@ function dev() {
         if [[ "$2" == "-p" ]]; then
             push
         fi
-    elif [[ "$1" == -p ]]; then
-        current_branch=$(git_current_branch)
-        co develop && pull && co $current_branch && mgd && push
+    else
+        case $1 in
+            "-p")
+                current_branch=$(git_current_branch)
+                co develop && pull && co $current_branch && mgd && push
+                ;;
+            "-s")
+                co develop && pull
+                ;;
+            *)
+                echo "$0 {-p|-s}"
+                ;;
+        esac
     fi
-}
-
-# Delete local branches which remotes have been deleted
-function dg() {
-    git branch -v \
-    | grep -E '\[gone\]' \
-    | cut -c 3- \
-    | perl -lane 'print m/^\w+?\b/g' \
-    | xargs git branch -D
 }
 
 function nuke_node() {
