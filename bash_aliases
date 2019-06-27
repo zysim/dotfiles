@@ -201,7 +201,8 @@ function push() {
     git push origin HEAD:$(git_current_branch)
 }
 
-# rm aliases cuz goddamn
+# Terminal aliases
+alias cls='printf "\ec"'
 alias rm="rm -i"
 alias srm="srm -i"
 
