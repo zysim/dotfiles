@@ -45,9 +45,9 @@ alias lg="git log --graph --pretty=format:'%C(red)%h%Cgreen%d%Creset %s %C(blue)
 alias mg="git merge"
 alias mgd="mg develop"
 if [[ $OSTYPE == linux* ]]; then
-    alias prune='git remote prune origin && dg'
+    alias prune='git remote prune origin && begone_thots'
 elif [[ $OSTYPE == darwin* ]]; then
-    alias pr='git remote prune origin && dg'
+    alias pr='git remote prune origin && begone_thots'
 fi
 alias ss='git status -sb'
 
