@@ -218,6 +218,6 @@ function fuckin_pen() {
 
 # This is for work at Radweb. Once I'm outta this place then just delete this
 # Opens the debugging menu on the test Android phone
-alias debug_android_menu="adb shell input keyevent 82 && clear"
-alias debug_android_start="react-native run-android --deviceId D1AGAS3780905879"
-alias debug_android_reverse="adb -s D1AGAS3780905879 reverse tcp:8081 tcp:8081"
+alias debug_android_menu="adb shell input keyevent 82 && cls"
+alias debug_android_start="react-native run-android --deviceId D1AGAS3780905879 && cls"
+alias debug_android_reverse="adb -s D1AGAS3780905879 reverse tcp:8081 tcp:8081 && cls"
