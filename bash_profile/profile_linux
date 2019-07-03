@@ -15,8 +15,8 @@ if [ -e $HOME/.bash_aliases ] ; then
 fi
 
 # set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 # set PATH so it includes user's private bin if it exists
@@ -24,4 +24,10 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="$HOME/.cargo/bin:$PATH"
+if [[ ! -v ANDROID_HOME ]]; then
+    export ANDROID_HOME=$HOME/.local/android
+fi
+
+export PATH=$HOME/.cargo/bin:$PATH
+export PATH=$PATH:$ANDROID_HOME/tools/emulator
+export PATH=$PATH:$ANDROID_HOME/tools/bin
