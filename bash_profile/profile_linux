@@ -36,3 +36,4 @@ fi
 export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/tools/emulator
 export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$HOME/.local/bin
