@@ -1,20 +1,20 @@
 #!/usr/bin/bash
-BASE='~/.mine_dotfiles'
-OS=`uname -s`
-ARC=`uname -m`
-mv `pwd` $BASE
+BASE="~/.mine_dotfiles"
+OS=$(uname -s)
+ARC=$(uname -m)
+mv $(pwd) $BASE
 cd $BASE
 
 sudo echo
 
 # Making symlinks
-ln -nfs ~/.bash_aliases "$BASE/bash_aliases"
-case $BASE in
+ln -nfs "$BASE/bash_aliases" ~/.bash_aliases
+case $OS in
     linux*     ) ln -nfs "$BASE/bash_profile/profile_linux" ~/.bash_profile;;
     [dD]arwin* ) ln -nfs "$BASE/bash_profile/profile_mac" ~/.bash_profile;;
 esac
 ln -nfs "$BASE/.bashrc" ~/.bashrc
-ln -nfs "$BASE/.gitignore" ~/.gitignore
+ln -nfs "$BASE/gitignore" ~/.gitignore
 chmod u+x $BASE/scripts/*
 
 echo "Stuff moved to $BASE, and symlinks all made"
