@@ -148,7 +148,7 @@ function dev() {
         if [[ $create_new_branch == 1 ]]; then
             echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
             co develop && pull && co -b $1
-        elif [[ $current_branch != "develop" ]]; then
+        else
             git fetch && git merge origin/develop
         fi
         if [[ "$2" == "-p" ]]; then
