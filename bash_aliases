@@ -145,27 +145,22 @@ function dev() {
             fi
             current_branch=$1
         fi
-        co develop && pull
         if [[ $create_new_branch == 1 ]]; then
             echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
-            co -b $1 && mgd
+            co develop && pull && co -b $1
         elif [[ $current_branch != "develop" ]]; then
-            co $current_branch && mgd
+            git fetch && git merge origin/develop
         fi
         if [[ "$2" == "-p" ]]; then
             push
         fi
     else
         case $1 in
-            "-p")
-                current_branch=$(git_current_branch)
-                co develop && pull && co $current_branch && mgd && push
-                ;;
             "-s")
                 co develop && pull
                 ;;
-            *)
-                echo "$0 {-p|-s}"
+            "-h" | *)
+                echo "$0 {-h|-s}"
                 ;;
         esac
     fi
@@ -198,7 +193,11 @@ function pull() {
 }
 
 function push() {
-    git push origin HEAD:$(git_current_branch)
+    if [[ $(git_current_branch) == "develop" ]]; then
+        echo -e "${BR}You're currently on develop. We ain't pushin'.${NC}"
+    else
+        git push origin HEAD:$(git_current_branch)
+    fi
 }
 
 # Terminal aliases
