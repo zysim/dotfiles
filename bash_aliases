@@ -149,7 +149,7 @@ function dev() {
             echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
             co develop && pull && co -b $1
         else
-            git fetch && git merge origin/develop
+            co $current_branch && git fetch && git merge origin/develop
         fi
         if [[ "$2" == "-p" ]]; then
             push
