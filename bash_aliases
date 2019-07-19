@@ -146,9 +146,6 @@ function dev() {
                 co $1 && git fetch && git merge origin/develop
             fi
         fi
-        if [[ "$2" == "-p" ]]; then
-            push
-        fi
     else
         case $1 in
             "-s")
