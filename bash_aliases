@@ -131,25 +131,16 @@ function dev() {
     local create_new_branch
     if ! [[ "$1" =~ ^- ]]; then
         if [[ -z "$1" ]]; then
-            # Use the current branch to co to
-            current_branch=$(git_current_branch)
+            git fetch && git merge origin/develop
         else
             # Check if it's a new branch
             git rev-parse --verify $1 &>/dev/null
             if [[ $? == 0 ]]; then
-                # Create a new branch
-                create_new_branch=0
+                co $1 && git fetch && git merge origin/develop
             else
-                # Use the user-supplied branch to co to
-                create_new_branch=1
+                echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
+                co develop && pull && co -b $1
             fi
-            current_branch=$1
-        fi
-        if [[ $create_new_branch == 1 ]]; then
-            echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
-            co develop && pull && co -b $1
-        else
-            co $current_branch && git fetch && git merge origin/develop
         fi
         if [[ "$2" == "-p" ]]; then
             push
