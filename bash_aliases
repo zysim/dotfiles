@@ -211,3 +211,5 @@ function fuckin_pen() {
 alias debug_android_menu="adb shell input keyevent 82 && cls"
 alias debug_android_start="react-native run-android --deviceId D1AGAS3780905879 && cls"
 alias debug_android_reverse="adb -s D1AGAS3780905879 reverse tcp:8081 tcp:8081 && cls"
+
+alias mkvirtualenv='mkvirtualenv --no-site-packages --distribute'

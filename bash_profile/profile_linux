@@ -37,3 +37,11 @@ export PATH=$HOME/.cargo/bin:$PATH
 export PATH=$PATH:$ANDROID_HOME/tools/emulator
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$HOME/.local/bin
+export WORKON_HOME=$HOME/.virtualenvs
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
+
+source ~/.local/bin/virtualenvwrapper.sh >/dev/null
+
+pip3 completion --bash >/dev/null
+
