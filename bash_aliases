@@ -141,11 +141,9 @@ function dev() {
                 if [[ $? != 0 ]]; then
                     echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
                     co develop && pull && co -b $1
-                else
-                    co $1 && git fetch && git merge origin/develop
                 fi
             else
-                co origin/$1 && git fetch && git merge origin/develop
+                co $1 && git fetch && git merge origin/develop
             fi
         fi
         if [[ "$2" == "-p" ]]; then
