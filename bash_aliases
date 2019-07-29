@@ -31,8 +31,8 @@ BLC="\033[1;96m"
 BW="\033[1;97m"
 
 # IB aliases
-alias ib='cd ~/Documents/Work/InventoryBase'
-alias ibr='cd ~/Documents/Work/InventoryBase-Go-RN'
+alias ib='cd ~/Documents/Work/InventoryBase && nvm use'
+alias ibr='cd ~/Documents/Work/InventoryBase-Go-RN && nvm use'
 
 # Git aliases
 alias acip='add && cip'
