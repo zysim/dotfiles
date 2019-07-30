@@ -23,6 +23,7 @@ fi
 alias launch_emulator='emulator @Nexus_5X_API_27'
 
 function yarn_it_all() {
+    nvm use
     if [[ --skip == $1 ]]; then
         echo "${Y}Skipping yarn test${NC}"
         yarn flow && yarn lint
