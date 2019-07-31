@@ -127,11 +127,11 @@ function del() {
 }
 
 function dev() {
-    local current_branch
-    local create_new_branch
     if ! [[ "$1" =~ ^- ]]; then
+        co develop && pull
         if [[ -z "$1" ]]; then
-            git fetch && git merge origin/develop
+            local current_branch=$(git_current_branch)
+            co $current_branch && git merge develop
         else
             # Check if it's a remote branch
             git rev-parse --verify origin/$1 &>/dev/null
@@ -140,10 +140,10 @@ function dev() {
                 git rev-parse --verify $1 &>/dev/null
                 if [[ $? != 0 ]]; then
                     echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
-                    co develop && pull && co -b $1
+                    co -b $1
                 fi
             else
-                co $1 && git fetch && git merge origin/develop
+              co $1 && git merge develop
             fi
         fi
     else
