@@ -127,10 +127,10 @@ function del() {
 }
 
 function dev() {
+    local current_branch=$(git_current_branch)
     if ! [[ "$1" =~ ^- ]]; then
         co develop && pull
         if [[ -z "$1" ]]; then
-            local current_branch=$(git_current_branch)
             co $current_branch && git merge develop
         else
             # Check if it's a remote branch
