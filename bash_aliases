@@ -31,8 +31,8 @@ BLC="\033[1;96m"
 BW="\033[1;97m"
 
 # IB aliases
-alias ib='cd ~/Documents/Work/InventoryBase && nvm use'
-alias ibr='cd ~/Documents/Work/InventoryBase-Go-RN && nvm use'
+alias ib='cd ~/Documents/Work/InventoryBase && nvm use && clear && printf "\e[3J"'
+alias ibr='cd ~/Documents/Work/InventoryBase-Go-RN && nvm use && clear && printf "\e[3J"'
 
 # Git aliases
 alias acip='add && cip'
@@ -199,7 +199,7 @@ function push() {
 }
 
 # Terminal aliases
-alias cls='printf "\ec"'
+alias cls='clear && printf "\e[3J"'
 alias rm="rm -i"
 alias srm="srm -i"
 

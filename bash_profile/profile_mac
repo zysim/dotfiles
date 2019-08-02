@@ -65,6 +65,7 @@ function kickstart() {
             ;;
         2)
             ib && nvm use --silent && npm start
+            cls
             ;;
         *)
             echo "Didn't understand $1. Do it again."
