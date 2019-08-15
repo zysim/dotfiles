@@ -30,6 +30,9 @@ BLM="\033[1;95m"
 BLC="\033[1;96m"
 BW="\033[1;97m"
 
+# Important. Never delete.
+alias please='sudo '
+
 # IB aliases
 alias ib='cd ~/Documents/Work/InventoryBase && nvm use && clear && printf "\e[3J"'
 alias ibr='cd ~/Documents/Work/InventoryBase-Go-RN && nvm use && clear && printf "\e[3J"'
