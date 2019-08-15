@@ -47,11 +47,7 @@ alias git_current_branch='git rev-parse --abbrev-ref HEAD'
 alias lg="git log --graph --pretty=format:'%C(red)%h%Cgreen%d%Creset %s %C(blue) %an, %ar%Creset'"
 alias mg="git merge"
 alias mgd="mg develop"
-if [[ $OSTYPE == linux* ]]; then
-    alias prune='git remote prune origin && begone_thots'
-elif [[ $OSTYPE == darwin* ]]; then
-    alias pr='git remote prune origin && begone_thots'
-fi
+alias prune='git remote prune origin && begone_thots'
 alias ss='git status -sb'
 
 # Git functions
@@ -86,7 +82,7 @@ function begone_thots() {
     git branch -v \
     | grep -E '\[gone\]' \
     | cut -c 3- \
-    | perl -lane 'print m/^\w+?\b/g' \
+    | perl -lane 'print m/^[-a-zA-Z\/]+?\s/g' \
     | xargs git branch -D
 }
 
