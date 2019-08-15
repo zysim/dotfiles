@@ -50,6 +50,9 @@ alias mgd="mg develop"
 alias prune='git remote prune origin && begone_thots'
 alias ss='git status -sb'
 
+# Etc
+alias mine='cd ~/.mine_dotfiles'
+
 # Git functions
 function acidev() {
     if [ -n "$1" ]; then
