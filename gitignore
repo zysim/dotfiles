@@ -1,3 +1,4 @@
 .vscode
 tempCodeRunnerFile.*
-RecreateDB.sql # This is for work; to remake the DB
+# This is for work; to remake the DB
+RecreateDB.sql
