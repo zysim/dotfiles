@@ -159,6 +159,12 @@ function dev() {
     fi
 }
 
+function git_relative_remote_branch() {
+    git rev-parse --abbrev-ref --symbolic-full-name @{u} \
+    | perl -lane "print m/^$(git remote)\/(.+?)$/" \
+    | xargs echo
+}
+
 function nuke_node() {
     echo "You're here:"
     pwd
@@ -182,18 +188,22 @@ function nuke_node() {
 }
 
 function pull() {
-    git fetch origin && git rebase -p origin/$(git_current_branch)
+    local remote=$(git_relative_remote_branch)
+    if [[ $? == 0 ]]; then
+        git fetch origin && git rebase -p origin/$remote
+    else
+        echo -e "${BY}As the sign says bud; we can't pull.${NC}"
+    fi
 }
 
 function push() {
-    local current_branch=$(git_current_branch)
-    if [[ $current_branch == "develop" ]]; then
+    if [[ $git_current_branch == "develop" ]]; then
         echo -e "${BR}You're currently on develop. We ain't pushin'.${NC}"
     else
-        # Check if there's a remote branch
-            git rev-parse --verify origin/$current_branch &>/dev/null
+        local remote=$(git_relative_remote_branch)
+            git rev-parse --verify origin/$remote &>/dev/null
             if [[ $? != 0 ]]; then
-                git push -u origin $current_branch
+                git push -u origin $remote
             else
                 git push
             fi
