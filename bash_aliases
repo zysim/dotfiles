@@ -202,7 +202,7 @@ function push() {
         echo -e "${BR}You're currently on develop. We ain't pushin'.${NC}"
     else
         git_remote_branch &>/dev/null
-        if [[ $? != 0]]; then
+        if [[ $? != 0 ]]; then
             git push -u origin $git_current_branch
         else
             git push
