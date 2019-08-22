@@ -198,12 +198,12 @@ function pull() {
 }
 
 function push() {
-    if [[ $git_current_branch == "develop" ]]; then
+    if [[ $(git_current_branch) == "develop" ]]; then
         echo -e "${BR}You're currently on develop. We ain't pushin'.${NC}"
     else
         git_remote_branch &>/dev/null
         if [[ $? != 0 ]]; then
-            git push -u origin $git_current_branch
+            git push -u origin $(git_current_branch)
         else
             git push
         fi
