@@ -44,6 +44,7 @@ alias br="git branch"
 alias brv="git branch -vv"
 alias ci="git commit"
 alias git_current_branch='git rev-parse --abbrev-ref HEAD'
+alias git_remote_branch='git rev-parse --abbrev-ref --symbolic-full-name @{u}'
 alias lg="git log --graph --pretty=format:'%C(red)%h%Cgreen%d%Creset %s %C(blue) %an, %ar%Creset'"
 alias mg="git merge"
 alias mgd="mg develop"
@@ -200,13 +201,12 @@ function push() {
     if [[ $git_current_branch == "develop" ]]; then
         echo -e "${BR}You're currently on develop. We ain't pushin'.${NC}"
     else
-        local remote=$(git_relative_remote_branch)
-            git rev-parse --verify origin/$remote &>/dev/null
-            if [[ $? != 0 ]]; then
-                git push -u origin $remote
-            else
-                git push
-            fi
+        git_remote_branch &>/dev/null
+        if [[ $? != 0]]; then
+            git push -u origin $git_current_branch
+        else
+            git push
+        fi
     fi
 }
 
