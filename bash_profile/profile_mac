@@ -35,11 +35,10 @@ function yarn_it_all() {
 function kickstart() {
     case $1 in
         bundler)
-            ibr && nvm use --silent && yarn start
+            ibr && yarn start
             ;;
         mobile)
             ibr
-            nvm use --silent
             local id=$(adb devices -l | grep usb | perl -lane 'print m/^[\d\w]+?\b/g')
 	        if [ -n $id ]; then
 		        adb -s $id reverse tcp:8081 tcp:8081
@@ -48,23 +47,26 @@ function kickstart() {
                 launch_emulator &
                 react-native run-android
 	        fi
-	        adb logcat | grep ReactNativeJS
+            if [[ $? == 0 ]]
+                clear && printf '\e[3J'
+	            adb logcat | grep ReactNativeJS
+            else
+                echo -e "${BR}Couldn't run React Native. Please try again.${NC}"
+            fi
             ;;
         ngrok)
             ib
-            nvm use --silent
             vagrant up
             ngrok http 8000 --host-header=ib.api
             ;;
         1)
             ib
-            nvm use --silent
             vagrant up
             vagrant ssh
             cd code
             ;;
         2)
-            ib && nvm use --silent && npm start
+            ib && npm start
             cls
             ;;
         *)
