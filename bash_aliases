@@ -166,6 +166,10 @@ function git_relative_remote_branch() {
     | xargs echo
 }
 
+function nuke_all_local_branches() {
+    dev -s && br | xargs br -D
+}
+
 function nuke_node() {
     echo "You're here:"
     pwd
