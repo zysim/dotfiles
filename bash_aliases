@@ -86,7 +86,7 @@ function begone_thots() {
     git branch -v \
     | grep -E '\[gone\]' \
     | cut -c 3- \
-    | perl -lane 'print m/^[-a-zA-Z\/]+?\s/g' \
+    | perl -lane 'print m/^[-\w\/]+?\s/g' \
     | xargs git branch -D
 }
 
