@@ -167,7 +167,7 @@ function git_relative_remote_branch() {
 }
 
 function nuke_all_local_branches() {
-    dev -s && br | xargs git branch -D
+    dev -s && br | cut -c 3- | grep ^[^develop] | grep ^[^mine] | xargs git branch -D
 }
 
 function nuke_node() {
