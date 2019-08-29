@@ -40,16 +40,14 @@ function kickstart() {
         mobile)
             ibr
             local id=$(adb devices -l | grep usb | perl -lane 'print m/^[\d\w]+?\b/g')
-	        if [ -n $id ]; then
-		        adb -s $id reverse tcp:8081 tcp:8081
-		        react-native run-android --deviceId $id
-	        else
-                launch_emulator &
-                react-native run-android
-	        fi
-            if [[ $? == 0 ]]
-                clear && printf '\e[3J'
-	            adb logcat | grep ReactNativeJS
+	    if [[ -n $id ]]; then
+		adb -s $id reverse tcp:8081 tcp:8081
+		react-native run-android --deviceId $id
+	    else
+                launch_emulator & react-native run-android
+	    fi
+            if [[ $? == 0 ]]; then
+                cls && adb logcat | grep ReactNativeJS
             else
                 echo -e "${BR}Couldn't run React Native. Please try again.${NC}"
             fi
