@@ -73,6 +73,8 @@ function kickstart() {
     esac
 }
 
+export REACT_EDITOR=vim
+
 export PATH=$PATH:$HOME/.local/bin
 
 export ANDROID_HOME=$HOME/Library/Android
