@@ -171,14 +171,40 @@ function nuke_all_local_branches() {
 }
 
 function nuke_node() {
-    echo "You're here:"
-    pwd
+    local original_path=$(pwd)
+    local path=$original_path
+
+    echo "${LG}You're here: $original_path${NC}"
+
+    while [[ ! -f $path/package.json ]]; do
+        if [[ ! $path =~ ^$HOME/Documents ]]; then
+            echo -e "${LR}No `package.json` found in this project. Aborting.${NC}"
+            return
+        fi
+        path=${path%/*}
+    done
+
+    cd $path
+
     if ! [[ -d node_modules ]]; then
-        echo 'node_modules not found in this directory. Aborting.'
-        exit 1
+        read -p "No node_modules. Install packages anyway? [yN] " ans
+        if [[ ! $ans =~ ^[yY]$ ]]; then
+            echo -e "${LY}y wasn't received. Not installing.${NC}"
+            cd $original_path
+            return
+        else
+            if [[ $path =~ InventoryBase-Go-RN$ ]]; then
+                yarn install
+            else
+                npm i
+            fi
+            cd $original_path
+            return
+        fi
     fi
-    read -p "You sure you want to nuke node_modules? [y/N]" ans
-    if [[ $ans =~ [yY] ]]; then
+
+    read -p "You sure you want to nuke node_modules? [y/N] " ans
+    if [[ $ans =~ ^[yY]$ ]]; then
         rm -rf node_modules
         if [[ $(pwd) =~ InventoryBase-Go-RN$ ]]; then
             yarn
@@ -190,6 +216,7 @@ function nuke_node() {
     else
         echo "$ans received. Not nuking."
     fi
+    cd $original_path
 }
 
 function pull() {
