@@ -24,12 +24,7 @@ alias launch_emulator='emulator @Nexus_5X_API_27'
 
 function yarn_it_all() {
     nvm use
-    if [[ --skip == $1 ]]; then
-        echo "${Y}Skipping yarn test${NC}"
-        yarn flow && yarn lint
-    else
-        yarn test && yarn flow && yarn lint
-    fi
+    yarn flow && yarn lint && ci
 }
 
 function kickstart() {
@@ -83,3 +78,5 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
