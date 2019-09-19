@@ -174,7 +174,7 @@ function nuke_node() {
     local original_path=$(pwd)
     local path=$original_path
 
-    echo "${LG}You're here: $original_path${NC}"
+    echo -e "${LG}You're here: $original_path${NC}"
 
     while [[ ! -f $path/package.json ]]; do
         if [[ ! $path =~ ^$HOME/Documents ]]; then
