@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+# Terminal aliases
+alias cls='clear && printf "\e[3J"'
+alias rm="rm -i"
+alias srm="srm -i"

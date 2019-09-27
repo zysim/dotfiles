@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+# These are scripts that both machines have to run at the start
+
+export CLICOLOR=true
+
+# Load Aliases
+if [[ -e ~/.bash_aliases ]]; then
+    . ~/.bash_aliases
+fi
+
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi

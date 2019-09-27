@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+# ls aliases
+alias ll="ls -ahl"
+alias l="ls -AF"

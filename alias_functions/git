@@ -1,0 +1,152 @@
+#!/usr/bin/bash
+# Git aliases
+alias acip='add && cip'
+alias add='git add .'
+alias br="git branch"
+alias brv="git branch -vv"
+alias ci="git commit"
+alias git_current_branch='git rev-parse --abbrev-ref HEAD'
+alias git_remote_branch='git rev-parse --abbrev-ref --symbolic-full-name @{u}'
+alias lg="git log --graph --pretty=format:'%C(red)%h%Cgreen%d%Creset %s %C(blue) %an, %ar%Creset'"
+alias mg="git merge"
+alias mgd="mg develop"
+alias prune='git remote prune origin && begone_thots'
+alias ss='git status -sb'
+
+# Git functions
+function acidev() {
+    if [ -n "$1" ]; then
+        add && ci -m "$1" && dev
+    else
+        add && ci && dev
+    fi
+}
+
+function acidevp() {
+    if [ -n "$1" ]; then
+        acidev $1 && push
+    else
+        acidev && push
+    fi
+}
+
+function bdm() {
+    read -p "Deletes all branches that have been merged with master & develop. Proceed? [Y/n]" ans
+    if [[ $ans =~ "[yY]" ]] || [[ -z $ans ]]; then
+        git branch --merged | egrep -v "(^\*|master|dev)" | xargs git branch -d
+        echo "Complete!"
+    else
+        echo "Aborting..."
+    fi
+}
+
+# Delete local branches which remotes have been deleted
+function begone_thots() {
+    git branch -v \
+    | grep -E '\[gone\]' \
+    | cut -c 3- \
+    | perl -lane 'print m/^[-\w\/]+?\s/g' \
+    | xargs git branch -D
+}
+
+# Commits and pushes at once
+function cip() {
+    if [[ -z "$1" ]]; then
+        ci && push
+    else
+        ci -m "$1" && push
+    fi
+}
+
+function co() {
+    if [ $# -eq 0 ]; then
+        git checkout $(git branch | pick)
+    else
+        git checkout "$@"
+    fi
+}
+
+# Shorthand to checkout to a new branch from another
+function cob() {
+    if [[ -z "$1" ]]; then
+        echo "Please specify a new branch name."
+    else
+        if [[ -z "$2" ]]; then
+            co develop && co -b $1
+        else
+            co $2 && co -b $1
+        fi
+    fi
+}
+
+function del() {
+    local current_branch=$(git_current_branch)
+    if ! [[ $current_branch =~ (master|develop) ]]; then
+        dev -s && br -D $current_branch
+    else
+        echo -e "${LR}Currently on $current_branch. Not deleting this.${NC}"
+    fi
+}
+
+function dev() {
+    if ! [[ "$1" =~ ^- ]]; then
+        co develop && pull
+        if [[ -z "$1" ]]; then
+            co - && git merge develop
+        else
+            # Check if it's a remote branch
+            git rev-parse --verify origin/$1 &>/dev/null
+            if [[ $? != 0 ]]; then
+                # Check if it's a new branch
+                git rev-parse --verify $1 &>/dev/null
+                if [[ $? != 0 ]]; then
+                    echo -e "${BY}New branch $1 specified. Creating new branch...${NC}"
+                    co -b $1
+                fi
+            else
+              co $1 && git merge develop
+            fi
+        fi
+    else
+        case $1 in
+            "-s")
+                co develop && pull
+                ;;
+            "-h" | *)
+                echo "$0 {-h|-s}"
+                ;;
+        esac
+    fi
+}
+
+function git_relative_remote_branch() {
+    git rev-parse --abbrev-ref --symbolic-full-name @{u} \
+    | perl -lane "print m/^$(git remote)\/(.+?)$/" \
+    | xargs echo
+}
+
+function nuke_all_local_branches() {
+    dev -s && br | cut -c 3- | grep -Ev ^'develop|mine' | xargs git branch -D
+}
+
+function pull() {
+    local remote=$(git_relative_remote_branch)
+    if [[ $? == 0 ]]; then
+        git fetch origin && git rebase -p origin/$remote
+    else
+        echo -e "${BY}As the sign says bud; we can't pull.${NC}"
+    fi
+}
+
+function push() {
+    if [[ $(git_current_branch) == "develop" ]]; then
+        echo -e "${BR}You're currently on develop. We ain't pushin'.${NC}"
+    else
+        git_remote_branch &>/dev/null
+        if [[ $? != 0 ]]; then
+            git push -u origin $(git_current_branch)
+        else
+            git push
+        fi
+    fi
+}

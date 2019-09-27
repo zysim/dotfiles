@@ -1,0 +1,51 @@
+#!/usr/bin/bash
+function kickstart() {
+    case $1 in
+        bundler)
+            ibr && yarn start
+            ;;
+        mobile)
+            ibr
+            local id=$(adb devices -l | grep usb | perl -lane 'print m/^[\d\w]+?\b/g')
+	    if [[ -n $id ]]; then
+		adb -s $id reverse tcp:8081 tcp:8081
+		react-native run-android --deviceId $id
+	    else
+                launch_emulator & react-native run-android
+	    fi
+            if [[ $? == 0 ]]; then
+                cls && adb logcat | grep ReactNativeJS
+            else
+                echo -e "${BR}Couldn't run React Native. Please try again.${NC}"
+            fi
+            ;;
+        ngrok)
+            ib
+            vagrant up
+            ngrok http 8000 --host-header=ib.api
+            ;;
+        1)
+            ib
+            vagrant up
+            vagrant ssh
+            cd code
+            ;;
+        2)
+            ib && npm start
+            cls
+            ;;
+        *)
+            echo "'bundler', 'mobile', 'ngrok', '1', '2'"
+            ;;
+    esac
+}
+
+alias launch_emulator='emulator @Nexus_5X_API_27'
+
+export REACT_EDITOR=vim
+
+export ANDROID_HOME=$HOME/Library/Android
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin

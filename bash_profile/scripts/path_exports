@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+. ./paths/android
+. ./paths/cargo
+. ./paths/virtualenvs

@@ -1,0 +1,13 @@
+#!/usr/bin/bash
+# Source NVM
+if [[ -z `command -v nvm` ]]; then
+    if [[ -d ~/.nvm ]]; then
+        . ~/.nvm/nvm.sh
+    else
+        echo "NVM directory not found. Do you have it installed?"
+    fi
+else
+    if [[ -f .nvmrc ]]; then
+        nvm use --silent
+    fi
+fi

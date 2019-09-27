@@ -1,45 +1,17 @@
 #!/usr/bin/bash
 
-export CLICOLOR=true
+export DOTFILE_ROOT=~/.mine_dotfiles
+export PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	    . "$HOME/.bashrc"
-    fi
-fi
+. $PROFILE_ROOT/scripts/start
 
-# Run NVM
-if [ -z $(command -v nvm) ]; then
-    . ~/.nvm/nvm.sh
-fi
+# Source NVM
+. $PROFILE_ROOT/scripts/nvm
 
-if [ -e $HOME/.bash_aliases ] ; then
-    . $HOME/.bash_aliases
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
-
-if [[ ! -v ANDROID_HOME ]]; then
-    export ANDROID_HOME=$HOME/.local/android
-fi
-
-export PATH=$HOME/.cargo/bin:$PATH
-export PATH=$PATH:$ANDROID_HOME/tools/emulator
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-export PATH=$PATH:$HOME/.local/bin
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
-export PIP_VIRTUALENV_BASE=$HOME/.virtualenvs
+# Source android
+cd $PROFILE_ROOT/scripts
+. ./path_exports
+cd - > /dev/null
 
 source ~/.local/bin/virtualenvwrapper.sh >/dev/null
 

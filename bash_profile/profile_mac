@@ -1,82 +1,15 @@
 #!/usr/bin/bash
 
-export CLICOLOR=true
+export DOTFILE_ROOT=~/.mine_dotfiles
+export PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
+
+. $PROFILE_ROOT/scripts/start
 
 # Source NVM
-if [[ -z `command -v nvm` ]]; then
-    if [[ -d ~/.nvm ]]; then
-        . ~/.nvm/nvm.sh
-    else
-        echo "NVM directory not found. Do you have it installed?"
-    fi
-else
-    if [[ -f .nvmrc ]]; then
-        nvm use --silent
-    fi
-fi
+. $PROFILE_ROOT/scripts/nvm
 
-# Load Aliases
-if [[ -e ~/.bash_aliases ]]; then
-    . ~/.bash_aliases
-fi
+# IB scripts
+. $PROFILE_ROOT/scripts/ib
 
-alias launch_emulator='emulator @Nexus_5X_API_27'
-
-function yarn_it_all() {
-    nvm use
-    yarn flow && yarn lint && ci
-}
-
-function kickstart() {
-    case $1 in
-        bundler)
-            ibr && yarn start
-            ;;
-        mobile)
-            ibr
-            local id=$(adb devices -l | grep usb | perl -lane 'print m/^[\d\w]+?\b/g')
-	    if [[ -n $id ]]; then
-		adb -s $id reverse tcp:8081 tcp:8081
-		react-native run-android --deviceId $id
-	    else
-                launch_emulator & react-native run-android
-	    fi
-            if [[ $? == 0 ]]; then
-                cls && adb logcat | grep ReactNativeJS
-            else
-                echo -e "${BR}Couldn't run React Native. Please try again.${NC}"
-            fi
-            ;;
-        ngrok)
-            ib
-            vagrant up
-            ngrok http 8000 --host-header=ib.api
-            ;;
-        1)
-            ib
-            vagrant up
-            vagrant ssh
-            cd code
-            ;;
-        2)
-            ib && npm start
-            cls
-            ;;
-        *)
-            echo "'bundler', 'mobile', 'ngrok', '1', '2'"
-            ;;
-    esac
-}
-
-export REACT_EDITOR=vim
-
-export PATH=$PATH:$HOME/.local/bin
-
-export ANDROID_HOME=$HOME/Library/Android
-
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
-
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+# Source RVM
+. $PROFILE_ROOT/scripts/rvm

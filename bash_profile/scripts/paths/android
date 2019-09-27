@@ -1,0 +1,7 @@
+#!/usr/bin/bash
+# Add Android stuff to $PATH
+if [[ ! -v ANDROID_HOME ]]; then
+    export ANDROID_HOME=$HOME/.local/android
+    export PATH=$PATH:$ANDROID_HOME/tools/emulator
+    export PATH=$PATH:$ANDROID_HOME/tools/bin
+fi
