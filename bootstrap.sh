@@ -8,7 +8,7 @@ cd $BASE
 sudo echo
 
 # Making symlinks
-ln -nfs "$BASE/bash_aliases" ~/.bash_aliases
+ln -nfs "$BASE/bash_aliases/aliases" ~/.bash_aliases
 case $OS in
     linux*     ) ln -nfs "$BASE/bash_profile/profile_linux" ~/.bash_profile;;
     [dD]arwin* ) ln -nfs "$BASE/bash_profile/profile_mac" ~/.bash_profile;;
