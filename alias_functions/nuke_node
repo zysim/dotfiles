@@ -37,6 +37,8 @@ function nuke_node() {
         rm -rf node_modules
         if [[ $(pwd) =~ InventoryBase-Go-RN$ ]]; then
             yarn
+            echo -e "${LY}Nuking Pods...${NC}"
+            cd ios && rvm use && rm -rf Pods && pod install && cd ..
         else
             npm i
         fi
