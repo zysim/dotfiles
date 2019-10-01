@@ -1,7 +1,24 @@
 #!/usr/bin/bash
+function install_node() {
+    local path=$(pwd)
+    if [[ $path =~ InventoryBase-Go-RN$ ]]; then
+        yarn
+    else
+        npm i
+    fi
+}
+
+function install_pods() {
+    local path=$(pwd)
+    if [[ $path =~ InventoryBase-Go-RN$ ]]; then
+        echo -e "${LY}Nuking Pods...${NC}"
+        cd ios && rvm use && rm -rf Pods/ && pod install
+        cd - &> /dev/null
+    fi
+}
+
 function nuke_node() {
-    local original_path=$(pwd)
-    local path=$original_path
+    local path=$(pwd)
 
     echo -e "${LG}You're here: $original_path${NC}"
 
@@ -22,12 +39,8 @@ function nuke_node() {
             cd $original_path
             return
         else
-            if [[ $path =~ InventoryBase-Go-RN$ ]]; then
-                yarn install
-            else
-                npm i
-            fi
-            cd $original_path
+            install_node
+            cd - &> /dev/null
             return
         fi
     fi
@@ -35,17 +48,12 @@ function nuke_node() {
     read -p "You sure you want to nuke node_modules? [y/N] " ans
     if [[ $ans =~ ^[yY]$ ]]; then
         rm -rf node_modules
-        if [[ $(pwd) =~ InventoryBase-Go-RN$ ]]; then
-            yarn
-            echo -e "${LY}Nuking Pods...${NC}"
-            cd ios && rvm use && rm -rf Pods && pod install && cd ..
-        else
-            npm i
-        fi
+        install_node
+        install_pods
     elif [[ -z $ans ]]; then
         echo 'N received. Not nuking.'
     else
         echo "$ans received. Not nuking."
     fi
-    cd $original_path
+    cd - &> /dev/null
 }
