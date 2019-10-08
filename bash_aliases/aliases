@@ -5,27 +5,10 @@ if [[ -z $DOTFILE_ROOT ]]; then
 fi
 alias mine="cd ${DOTFILE_ROOT}"
 
-ALIAS_ROOT=$DOTFILE_ROOT/bash_aliases
-
-. $ALIAS_ROOT/alias_functions/colours
-
 # Important. Never delete.
 alias please='sudo '
 
-# IB aliases
-. $ALIAS_ROOT/alias_functions/ib
-
-# Git aliases
-. $ALIAS_ROOT/alias_functions/git
-
-# Nuke NPM packages
-. $ALIAS_ROOT/alias_functions/nuke_node
-
-# Terminal aliases
-. $ALIAS_ROOT/alias_functions/terminal
-
-# Etc
-. $ALIAS_ROOT/alias_functions/etc
-
-# ls
-. $ALIAS_ROOT/alias_functions/ls
+# Source aliases
+for f in $DOTFILE_ROOT/bash_aliases/alias_functions/*; do
+    . $f
+done
