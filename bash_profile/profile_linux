@@ -8,7 +8,7 @@ export PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
 # Source NVM
 . $PROFILE_ROOT/scripts/nvm
 
-# Source android
+# Source paths
 cd $PROFILE_ROOT/scripts
 . ./path_exports
 cd - > /dev/null

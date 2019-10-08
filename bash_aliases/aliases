@@ -29,6 +29,3 @@ alias please='sudo '
 
 # ls
 . $ALIAS_ROOT/alias_functions/ls
-
-# Etc
-. $ALIAS_ROOT/alias_functions/etc
