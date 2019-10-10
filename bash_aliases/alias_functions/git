@@ -12,7 +12,7 @@ alias mg="git merge"
 alias mgd="mg develop"
 alias prune='git remote prune origin && begone_thots'
 alias ss='git status -sb'
-alias grep_all="br -r | tr -d \* | sed '/->/d' | xargs git grep initialRoute"
+alias grep_all="br -a | tr -d \* | sed '/->/d' | xargs git grep"
 
 # Git functions
 function acidev() {
