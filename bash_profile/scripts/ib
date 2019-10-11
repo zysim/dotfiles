@@ -44,7 +44,16 @@ alias launch_emulator='emulator @Nexus_5X_API_27'
 
 export REACT_EDITOR=vim
 
-export ANDROID_HOME=$HOME/Library/Android
+OS=$(uname -s)
+case $OS in
+    linux* )
+        export ANDROID_HOME=$HOME/Android/Sdk
+        ;;
+    [dD]arwin* )
+        export ANDROID_HOME=$HOME/Library/Android
+        ;;
+esac
+
 export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/platform-tools

@@ -3,17 +3,16 @@
 export DOTFILE_ROOT=~/.mine_dotfiles
 export PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
 
+# This needs to be called first
 . $PROFILE_ROOT/scripts/start
 
-# Source NVM
-. $PROFILE_ROOT/scripts/nvm
+for f in $PROFILE_ROOT/scripts/*; do
+    . "$f"
+done
 
-# Source paths
-cd $PROFILE_ROOT/scripts
-. ./path_exports
-cd - > /dev/null
+cd -> /dev/null
 
-source ~/.local/bin/virtualenvwrapper.sh >/dev/null
+. ~/.local/bin/virtualenvwrapper.sh >/dev/null
 
 pip3 completion --bash >/dev/null
 
