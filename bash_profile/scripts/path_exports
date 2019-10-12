@@ -1,4 +1,7 @@
 #!/usr/bin/bash
-for f in ./paths/*; do
+for f in $PROFILE_ROOT/scripts/paths/*; do
+  echo $f
+  if [[ -f $f ]]; then
     . $f
+  fi
 done
