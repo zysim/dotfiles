@@ -46,7 +46,7 @@ export REACT_EDITOR=vim
 
 OS=$(uname -s)
 case $OS in
-    linux* )
+    [lL]inux* )
         export ANDROID_HOME=$HOME/Android/Sdk
         ;;
     [dD]arwin* )

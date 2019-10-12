@@ -1,0 +1,4 @@
+#!/usr/bin/bash
+# This is for coding folders and whatnot
+alias personal="cd ~/Documents/Personal"
+alias work="cd ~/Documents/Work"

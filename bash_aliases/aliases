@@ -1,8 +1,5 @@
 #!/usr/bin/bash
 # Initial stuff. Gotta have em here at the start.
-if [[ -z $DOTFILE_ROOT ]]; then
-    export DOTFILE_ROOT=~/.mine_dotfiles
-fi
 alias mine="cd ${DOTFILE_ROOT}"
 
 # Important. Never delete.
