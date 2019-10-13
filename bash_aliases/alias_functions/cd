@@ -1,4 +1,7 @@
 #!/usr/bin/bash
-# This is for coding folders and whatnot
+# This is for cd-ing to usual locations
 alias personal="cd ~/Documents/Personal"
 alias work="cd ~/Documents/Work"
+alias aliases="cd $ALIAS_ROOT/alias_functions"
+alias scripts="cd $PROFILE_ROOT/scripts"
+alias path_exports="cd $PROFILE_ROOT/scripts/paths"
