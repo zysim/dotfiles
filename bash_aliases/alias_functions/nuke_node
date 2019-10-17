@@ -1,7 +1,6 @@
 #!/usr/bin/bash
 function install_node() {
-    local path=$(pwd)
-    if [[ $path =~ InventoryBase-Go-RN$ ]]; then
+    if [[ "$1" =~ InventoryBase-Go-RN$ ]]; then
         yarn
     else
         npm i
@@ -9,8 +8,7 @@ function install_node() {
 }
 
 function install_pods() {
-    local path=$(pwd)
-    if [[ $path =~ InventoryBase-Go-RN$ ]]; then
+    if [[ "$1" =~ InventoryBase-Go-RN$ ]]; then
         echo -e "${LY}Nuking Pods...${NC}"
         cd ios && rvm use && rm -rf Pods/ && pod install
         cd - &> /dev/null
@@ -18,13 +16,15 @@ function install_pods() {
 }
 
 function nuke_node() {
+    local original_path=$(pwd)
     local path=$(pwd)
 
-    echo -e "${LG}You're here: $original_path${NC}"
+    echo -e "${LG}You're here: $path${NC}"
 
     while [[ ! -f $path/package.json ]]; do
         if [[ ! $path =~ ^$HOME/Documents ]]; then
             echo -e "${LR}No `package.json` found in this project. Aborting.${NC}"
+            cd $original_path
             return
         fi
         path=${path%/*}
@@ -39,8 +39,8 @@ function nuke_node() {
             cd $original_path
             return
         else
-            install_node
-            cd - &> /dev/null
+            install_node $path
+            cd $original_path &> /dev/null
             return
         fi
     fi
@@ -48,12 +48,12 @@ function nuke_node() {
     read -p "You sure you want to nuke node_modules? [y/N] " ans
     if [[ $ans =~ ^[yY]$ ]]; then
         rm -rf node_modules
-        install_node
-        install_pods
+        install_node $path
+        install_pods $path
     elif [[ -z $ans ]]; then
         echo 'N received. Not nuking.'
     else
         echo "$ans received. Not nuking."
     fi
-    cd - &> /dev/null
+    cd $original_path &> /dev/null
 }
