@@ -2,12 +2,10 @@
 # Source NVM
 if [[ -z `command -v nvm` ]]; then
     if [[ -d ~/.nvm ]]; then
+        export NVM_DIR="$HOME/.nvm"
         . ~/.nvm/nvm.sh
+        . ~/.nvm/bash_completion
     else
         echo "NVM directory not found. Do you have it installed?"
-    fi
-else
-    if [[ -f .nvmrc ]]; then
-        nvm use --silent
     fi
 fi
