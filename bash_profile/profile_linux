@@ -13,8 +13,6 @@ for f in $PROFILE_ROOT/scripts/*; do
     fi
 done
 
-cd -> /dev/null
-
 . ~/.local/bin/virtualenvwrapper.sh >/dev/null
 
 pip3 completion --bash >/dev/null
