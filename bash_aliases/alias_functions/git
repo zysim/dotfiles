@@ -10,7 +10,7 @@ alias git_remote_branch='git rev-parse --abbrev-ref --symbolic-full-name @{u}'
 alias lg="git log --graph --pretty=format:'%C(red)%h%Cgreen%d%Creset %s %C(blue) %an, %ar%Creset'"
 alias mg="git merge"
 alias mgd="mg develop"
-alias prune='git remote prune origin && begone_thots'
+alias prune='git fetch origin && git remote prune origin && begone_thots'
 alias ss='git status -sb'
 alias grep_all="br -a | tr -d \* | sed '/->/d' | xargs git grep"
 
@@ -127,7 +127,7 @@ function git_relative_remote_branch() {
 }
 
 function nuke_all_local_branches() {
-    dev -s && br | cut -c 3- | grep -Ev ^'develop|mine' | xargs git branch -D
+    dev -s && git remote prune origin && br | cut -c 3- | grep -Ev ^'develop|mine' | xargs git branch -D
 }
 
 function pull() {
