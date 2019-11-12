@@ -151,3 +151,19 @@ function push() {
         fi
     fi
 }
+
+function minefy() {
+    if [[ $1 =~ "-h" ]]; then
+        echo "Toggles between adding/removing 'mine/' from the start of the branch name"
+    else
+        if [[ -z $1 ]]; then
+            local current_branch=$(git_current_branch)
+            if [[ $current_branch =~ "mine/" ]]; then
+                echo $current_branch | cut -c 6- | xargs git branch -m
+            else
+                br -m "mine/${current_branch}"
+            fi
+            echo -e "${LG}Current branch name is $(git_current_branch) ${NC}"
+        fi
+    fi
+}
