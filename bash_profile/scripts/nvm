@@ -9,3 +9,12 @@ if [[ -z `command -v nvm` ]]; then
         echo "NVM directory not found. Do you have it installed?"
     fi
 fi
+
+# Update NVM
+function update_nvm() {
+    (
+        cd "$NVM_DIR"
+        git fetch --tags origin
+        co `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+    ) && \. "$NVM_DIR/nvm.sh"
+}
