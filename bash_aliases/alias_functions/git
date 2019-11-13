@@ -5,14 +5,15 @@ alias add='git add .'
 alias br="git branch"
 alias brv="git branch -vv"
 alias ci="git commit"
+alias cl="git add CHANGELOG.md && ci -nm 'Add Changelog Entry'"
 alias git_current_branch='git rev-parse --abbrev-ref HEAD'
 alias git_remote_branch='git rev-parse --abbrev-ref --symbolic-full-name @{u}'
+alias grep_all="br -a | tr -d \* | sed '/->/d' | xargs git grep"
 alias lg="git log --graph --pretty=format:'%C(red)%h%Cgreen%d%Creset %s %C(blue) %an, %ar%Creset'"
 alias mg="git merge"
 alias mgd="mg develop"
 alias prune='git fetch origin && git remote prune origin && begone_thots'
 alias ss='git status -sb'
-alias grep_all="br -a | tr -d \* | sed '/->/d' | xargs git grep"
 
 # Git functions
 function acidev() {
