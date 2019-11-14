@@ -128,7 +128,7 @@ function git_relative_remote_branch() {
 }
 
 function nuke_all_local_branches() {
-    dev -s && git remote prune origin && br | cut -c 3- | grep -Ev ^'develop|mine' | xargs git branch -D
+    dev -s && git remote prune origin && br | cut -c 3- | awk '!/^develop|mine/ {print $1}' | xargs git branch -D
 }
 
 function pull() {
