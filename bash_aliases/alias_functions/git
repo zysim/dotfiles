@@ -128,7 +128,22 @@ function git_relative_remote_branch() {
 }
 
 function nuke_all_local_branches() {
-    dev -s && git remote prune origin && br | cut -c 3- | awk '!/^develop|mine/ {print $1}' | xargs git branch -D
+    case $1 in
+        "-h")
+            echo "$0 [-h|-r]:"
+            echo "-h: Display this help screen"
+            echo "-r: Retain current branch"
+            ;;
+        "-r" | *)
+            if [[ "$1" == "-r" ]]; then
+                minefy
+            fi
+            dev -s && git remote prune origin && br | cut -c 3- | awk '!/^develop|mine/ {print $1}' | xargs git branch -D
+            if [[ "$1" == "-r" ]]; then
+                co - && minefy
+            fi
+            ;;
+    esac
 }
 
 function pull() {
