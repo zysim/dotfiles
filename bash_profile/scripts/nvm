@@ -1,12 +1,20 @@
 #!/usr/bin/bash
 # Source NVM
-if [[ -z `command -v nvm` ]]; then
-    if [[ -d ~/.nvm ]]; then
-        export NVM_DIR="$HOME/.nvm"
-        . ~/.nvm/nvm.sh
-        . ~/.nvm/bash_completion
-    else
-        echo "NVM directory not found. Do you have it installed?"
+if [[ -f '.nvmrc' ]]; then
+    echo -e "${LG}.nvmrc found. Calling nvm use...${NC}"
+    if [[ -z `command -v nvm` ]]; then
+        if [[ -d ~/.nvm ]]; then
+            export NVM_DIR="$HOME/.nvm"
+            . ~/.nvm/nvm.sh
+            . ~/.nvm/bash_completion
+            nvm use
+            cls
+        else
+            echo "NVM directory not found. Do you have it installed?"
+        fi
+    else 
+        nvm use
+        cls
     fi
 fi
 
