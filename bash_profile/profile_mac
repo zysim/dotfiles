@@ -5,6 +5,9 @@ PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
 
 . $PROFILE_ROOT/scripts/start
 
+# Source Android
+. $PROFILE_ROOT/scripts/android
+
 # Source NVM
 . $PROFILE_ROOT/scripts/nvm
 
