@@ -16,3 +16,6 @@ PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
 
 # Source RVM
 . $PROFILE_ROOT/scripts/rvm
+
+# Source no_cls
+. $PROFILE_ROOT/scripts/no_cls

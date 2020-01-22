@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+# This script runs `cls` unless I specify a '--no-cls' option
+
+function no_cls() {
+    if [[ "$1" != --no-cls ]]; then
+        cls
+    fi
+}
