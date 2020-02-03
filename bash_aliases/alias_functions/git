@@ -48,9 +48,8 @@ function begone_thots() {
     | grep -E '\[gone\]' \
     | cut -c 3- \
     | perl -lane 'print m/^[-\w\/\.]+?\s/g' \
-    | xargs git branch -D
-    
-    no_cls $1
+    | xargs git branch -D \
+    && no_cls $1
 }
 
 # Commits and pushes at once
@@ -114,14 +113,13 @@ function dev() {
     else
         case $1 in
             "-s")
-                co develop && pull
+                co develop && pull && no_cls $1
                 ;;
             "-h" | *)
                 echo "$0 {-h|-s}"
                 ;;
         esac
     fi
-    no_cls $1
 }
 
 function git_relative_remote_branch() {
@@ -164,12 +162,11 @@ function push() {
     else
         git_remote_branch &>/dev/null
         if [[ $? != 0 ]]; then
-            git push -u origin $(git_current_branch)
+            git push -u origin $(git_current_branch) && no_cls $1
         else
-            git push
+            git push && no_cls $1
         fi
     fi
-    no_cls $1
 }
 
 function minefy() {
