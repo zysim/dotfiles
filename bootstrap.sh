@@ -77,7 +77,7 @@ git config --global core.excludesfile ~/.gitignore
 echo "Git stuff set"
 
 # Awesome Vim Stuff
-ln -s ~/.vim_runtime $BASE/.vim_runtime
+ln -nfs $BASE/.vim_runtime ~/.vim_runtime
 . $BASE/.vim_runtime/install_awesome_vimrc.sh
 
 # Download Node
