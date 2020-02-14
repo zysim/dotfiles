@@ -103,7 +103,7 @@ fi
 
 # Prompt to remove installation directory
 if [[ $BASE != $DIR ]]; then
-  read -p "\033[0;33mRemove $DIR? [yN]\033[0m" remove
+  read -p "Remove $DIR? [yN]" remove
   case $remove in
     [yY] )
       rm -rf $DIR
