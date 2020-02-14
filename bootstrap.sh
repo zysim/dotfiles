@@ -113,3 +113,5 @@ if [[ $BASE != $DIR ]]; then
     ;;
   esac
 fi
+
+shopt -u dotglob
