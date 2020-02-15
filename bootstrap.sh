@@ -100,9 +100,9 @@ else
 fi
 
 # Source dotfiles
-read -p "\033[0;33mSource .bash_profile and .bash_aliases? [Yn]\033[0m" ans
-if [[ "$ans" =~ ^[nN]$ ]]; then
-  echo "Not sourcing."
+read -p "Source .bash_profile and .bash_aliases? [Yn]" ans
+if [[ $ans =~ ^[nN]$ ]]; then
+  echo -e "\033[0;33mNot sourcing.\033[0m"
 else
   . ~/.bash_profile
 fi
