@@ -3,8 +3,8 @@ BASE=~/.mine_dotfiles
 OS=$(uname -s)
 ARC=$(uname -m)
 DIR=$(pwd)
-USERNAME=Sim
-EMAIL=me@zhongyuen.dev
+GIT_USERNAME=Sim
+GIT_EMAIL=me@zhongyuen.dev
 
 # Allows mv-ing dotfiles
 shopt -s dotglob
@@ -58,19 +58,42 @@ if ! [ -x "`command -v pip3`" ]; then
     sudo apt install -y python3-pip
 fi
 
+set_git () {
+  read -p "Set git $1 to: (default: $2)" value
+  if [[ -z $value ]]; then
+    git config --global "user.$1" $2
+  else
+    git config --global "user.$1" $value
+    echo -e "\033[0;33mGit $1 set to \"$value\".\033[0m"
+  fi
+}
+
+check_git () {
+  # Don't declare and init local variable in the same line.
+  # See: https://www.tldp.org/LDP/abs/html/localvar.html
+  local git_config_value
+  git_config_value=$(git config --get --global "user.$1" &> /dev/null)
+
+  if [[ $? -eq 0 ]]; then
+    read -p "Git $1 \"$git_config_value\" already exists. Keep $1? [Yn]" keep
+
+    case $keep in
+      [nN] )
+        set_git $1 $2
+      ;;
+      * )
+        echo -e "\033[0;33mGit $2 shall remain as \"$git_config_value\".\033[0m"
+      ;;
+    esac
+  else
+    set_git $1 $2
+  fi
+}
+
 # Setting git stuff
-read -p "Set git username to: ($USERNAME)" name
-if [[ -z "$name" ]]; then
-  git config --global user.name $USERNAME
-else
-  git config --global user.name $name
-fi
-read -p "Set git email to: ($EMAIL)" email
-if [[ -z "$email" ]]; then
-  git config --global user.email $EMAIL
-else
-  git config --global user.email $email
-fi
+check_git name $GIT_USERNAME
+check_git email $GIT_EMAIL
+
 git config --global core.editor 'vim'
 git config --global core.excludesfile ~/.gitignore
 
