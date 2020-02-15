@@ -80,6 +80,12 @@ echo "Git stuff set"
 ln -nfs $BASE/.vim_runtime ~/.vim_runtime
 . $BASE/.vim_runtime/install_awesome_vimrc.sh
 
+# Check if curl's installed
+if ! [ -x "`command -v curl`" ]; then
+  echo "Installing curl..."
+    sudo apt install -y curl
+fi
+
 # Download Node
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash
 
