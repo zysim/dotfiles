@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 # Initial stuff. Gotta have em here at the start.
-alias mine="cd ${DOTFILE_ROOT}"
+alias mine="cd $DOTFILE_ROOT"
 
 # Important. Never delete.
 alias please='sudo '
