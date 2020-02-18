@@ -93,7 +93,7 @@ function del() {
 
 function dev() {
     if ! [[ "$1" =~ ^- ]]; then
-        co develop && pull
+        co develop && tug
         if [[ -z "$1" ]]; then
             co - && git merge develop
         else
@@ -113,7 +113,7 @@ function dev() {
     else
         case $1 in
             "-s")
-                co develop && pull && no_cls $1
+                co develop && tug && no_cls $1
                 ;;
             "-h" | *)
                 echo "$0 {-h|-s}"
