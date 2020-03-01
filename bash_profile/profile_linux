@@ -8,12 +8,14 @@ export PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
 . $PROFILE_ROOT/scripts/start
 
 for f in $PROFILE_ROOT/scripts/*; do
-    if [[ -f "$f" ]]; then
-        . "$f"
-    fi
+  if [[ -f "$f" ]]; then
+    . "$f"
+  fi
 done
 
-. ~/.local/bin/virtualenvwrapper.sh &>/dev/null
+if [[ ! $(uname -v) =~ Microsoft ]]; then
+  . ~/.local/bin/virtualenvwrapper.sh >/dev/null
 
-pip3 completion --bash &>/dev/null
+  pip3 completion --bash >/dev/null
+fi
 
