@@ -3,3 +3,6 @@ tempCodeRunnerFile.*
 # This is for work; to remake the DB
 RecreateDB.sql
 TODO
+# For IBR
+meta.json
+Router.js
