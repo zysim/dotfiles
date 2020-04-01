@@ -13,5 +13,5 @@ alias debug_android_reverse="adb -s D1AGAS3780905879 reverse tcp:8081 tcp:8081 &
 function yarn_it_all() {
     nvm use
     clear && printf "\e[3J"
-    yarn flow && yarn lint && yarn test
+    yarn flow && yarn lint:fix | grep error -B 2 && yarn test
 }
