@@ -21,8 +21,27 @@ function cd_and_nvm {
         cd $1
     fi
 
-    if [[ -f .nvmrc  && ! $(cat .nvmrc) =~ $(npm -v) ]]; then
-        nvm use && cls
+    if [[ ! -f .nvmrc ]]; then
+        echo -e "${LY}No .nvmrc in this folder?${NC}"
+        return
+    fi
+
+    local nvm_version=$(cat .nvmrc)
+    local depth=$(grep -o '\.' <<< $nvm_version | wc -l)
+    local current_node_version=$(node -v)
+    current_node_version=${current_node_version#v}
+
+    if [[ $nvm_version != $current_node_version ]]; then
+        if [[ $depth =~ "2" ]]; then
+            nvm use
+        elif [[ $depth =~ "1" ]]; then
+            current_node_version_no_patch=${current_node_version%.*}
+
+            if [[ $nvm_version != $current_node_version_no_patch ]]; then
+                nvm use
+            fi
+        fi
+        clear && printf "\e[3J"
     else
         echo -e "${BLY}Couldn't call NVM?${NC}"
     fi
