@@ -1,17 +1,29 @@
 #!/usr/bin/bash
 # IB aliases
 # This is for work at Radweb. Once I'm outta this place then just delete this
-alias ib='cd ~/Documents/Work/InventoryBase && nvm use && clear && printf "\e[3J"'
-alias ibr='cd ~/Documents/Work/InventoryBase-Go-RN && nvm use && rvm use && clear && printf "\e[3J"'
-alias ni='cd ~/Documents/Work/NicheCom-Mobile && nvm use && cls'
+alias ib='cd_and_nvm ~/Documents/Work/InventoryBase'
+alias ibr='cd_and_nvm ~/Documents/Work/InventoryBase-Go-RN && rvm use && cls'
+alias ni='cd_and_nvm ~/Documents/Work/NicheCom-Mobile'
 
 # Opens the debugging menu on the test Android phone
 alias debug_android_menu="adb shell input keyevent 82 && cls"
 alias debug_android_start="react-native run-android --deviceId D1AGAS3780905879 && cls"
 alias debug_android_reverse="adb -s D1AGAS3780905879 reverse tcp:8081 tcp:8081 && cls"
 
-function yarn_it_all() {
+function yarn_it_all {
     nvm use
     clear && printf "\e[3J"
     yarn flow && yarn lint:fix | grep error -B 2 && yarn test
+}
+
+function cd_and_nvm {
+    if [[ $1 != $(pwd) ]]; then
+        cd $1
+    fi
+
+    if [[ -f .nvmrc  && ! $(cat .nvmrc) =~ $(npm -v) ]]; then
+        nvm use && cls
+    else
+        echo -e "${BLY}Couldn't call NVM?${NC}"
+    fi
 }
