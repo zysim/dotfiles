@@ -113,10 +113,14 @@ function dev() {
     else
         case $1 in
             "-s")
-                co develop && tug && no_cls $1
+                co develop && tug && no_cls $2
+                ;;
+            "-r")
+                local branch=$(git_current_branch)
+                co develop && tug && br -D $branch && co -b $branch
                 ;;
             "-h" | *)
-                echo "$0 {-h|-s}"
+                echo "$0 {-h|-s|-r}"
                 ;;
         esac
     fi
