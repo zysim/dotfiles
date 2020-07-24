@@ -32,7 +32,6 @@ function kickstart() {
             ;;
         2)
             ib && npm start
-            cls
             ;;
         *)
             echo "'bundler', 'mobile', 'ngrok', '1', '2'"
