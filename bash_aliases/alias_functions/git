@@ -154,7 +154,7 @@ function nuke_all_local_branches() {
 function tug() {
     local remote=$(git_relative_remote_branch)
     if [[ $? == 0 ]]; then
-        git fetch origin && git rebase -p origin/$remote
+        git fetch origin && git rebase --rebase-merges origin/$remote
     else
         echo -e "${BY}As the sign says bud; we can't pull.${NC}"
     fi
