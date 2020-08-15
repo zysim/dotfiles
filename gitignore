@@ -6,3 +6,4 @@ TODO
 # For IBR
 meta.json
 Router.js
+$PROFILE_ROOT/scripts/secret
