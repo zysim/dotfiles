@@ -25,13 +25,21 @@ function kickstart() {
             ngrok http 8000 --host-header=ib.api
             ;;
         1)
-            ib
+            if [[ $2 == "ni" ]]; then
+                ni
+            else
+                ib
+            fi
             vagrant up
             vagrant ssh
             cd code
             ;;
         2)
-            ib && npm start
+            if [[ $2 == "ni" ]]; then
+                ni && npm start
+            else
+                ib && npm start
+            fi
             ;;
         *)
             echo "'bundler', 'mobile', 'ngrok', '1', '2'"

@@ -3,7 +3,8 @@
 # This is for work at Radweb. Once I'm outta this place then just delete this
 alias ib='cd_and_nvm ~/Documents/Work/InventoryBase'
 alias ibr='cd_and_nvm ~/Documents/Work/InventoryBase-Go-RN && rvm use && cls'
-alias ni='cd_and_nvm ~/Documents/Work/NicheCom-Mobile'
+alias ni='cd_and_nvm ~/Documents/Work/NicheCom'
+alias nim='cd_and_nvm ~/Documents/Work/NicheCom-Mobile'
 
 # Opens the debugging menu on the test Android phone
 alias debug_android_menu="adb shell input keyevent 82 && cls"
