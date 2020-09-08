@@ -13,7 +13,7 @@ for f in $PROFILE_ROOT/scripts/*; do
   fi
 done
 
-if [[ ! $(uname -v) =~ Microsoft ]]; then
+if [[ ! $(uname -v) =~ Microsoft && -f ~/.local/bin/virtualenvwrapper.sh ]]; then
   . ~/.local/bin/virtualenvwrapper.sh >/dev/null
 
   pip3 completion --bash >/dev/null
