@@ -7,3 +7,5 @@ TODO
 meta.json
 Router.js
 $PROFILE_ROOT/scripts/secret
+node_modules
+secret_aliases

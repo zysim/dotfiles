@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 BASE=~/.mine_dotfiles
-OS=$(uname -s)
+OS=
 ARC=$(uname -m)
 DIR=$(pwd)
 GIT_USERNAME=Sim
@@ -8,6 +8,15 @@ GIT_EMAIL=me@zhongyuen.dev
 
 # Allows mv-ing dotfiles
 shopt -s dotglob
+
+# Know which OS we're on
+if [[ $(uname -s) =~ "[lL]inux*" ]]; then
+  OS="linux"
+elif [[ $(uname -s) =~ "[dD]arwin*" ]]; then
+  OS="mac"
+else
+  OS="other"
+fi
 
 # Move this entire folder to ~/.mine_dotfiles if it isn't there already
 if [[ -e $DIR ]]; then
@@ -25,10 +34,10 @@ sudo echo
 # Making symlinks
 ln -nfs "$BASE/bash_aliases/aliases" ~/.bash_aliases
 case $OS in
-  [lL]inux* )
+  linux )
     ln -nfs "$BASE/bash_profile/profile_linux" ~/.bash_profile
     ;;
-  [dD]arwin* )
+  mac )
     ln -nfs "$BASE/bash_profile/profile_mac" ~/.bash_profile
     ;;
 esac
@@ -55,7 +64,13 @@ fi
 # Check if Pip's installed
 if ! [ -x "`command -v pip3`" ]; then
   echo "Installing pip3..."
-    sudo apt install -y python3-pip
+  sudo apt install -y python3-pip
+fi
+
+# Check if fzf's installed (for Macs only)
+if [[ $OS == mac && ! -x "`command -v fzf`" ]]; then
+  echo "Installing fzf..."
+  brew install fzf
 fi
 
 set_git () {

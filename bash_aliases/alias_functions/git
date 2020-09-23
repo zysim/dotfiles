@@ -62,8 +62,20 @@ function cip() {
 }
 
 function co() {
+    local os
+    case $(uname -s) in
+        [lL]inux* )
+            os=$(git branch | pick)
+        ;;
+        [dD]arwin* )
+            os=$(git branch | fzf)
+        ;;
+        * )
+            os="$@"
+        ;;
+    esac
     if [ $# -eq 0 ]; then
-        git checkout $(git branch | pick)
+        git checkout $os
     else
         git checkout "$@"
     fi
