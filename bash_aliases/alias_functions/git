@@ -167,7 +167,7 @@ function tug() {
     fi
 }
 
-function push() {
+function discharge() {
     if [[ $(git_current_branch) == "develop" ]]; then
         echo -e "${BR}You're currently on develop. We ain't pushin'.${NC}"
     else
