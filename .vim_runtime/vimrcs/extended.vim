@@ -29,7 +29,7 @@ set guioptions-=L
 
 " Colorscheme
 set background=dark
-colorscheme twilight
+colorscheme solarized8_low
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
