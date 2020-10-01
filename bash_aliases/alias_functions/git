@@ -16,22 +16,6 @@ alias prune='git fetch origin && git remote prune origin && begone_thots'
 alias ss='git status -sb'
 
 # Git functions
-function acidev() {
-    if [ -n "$1" ]; then
-        add && ci -m "$1" && dev
-    else
-        add && ci && dev
-    fi
-}
-
-function acidevp() {
-    if [ -n "$1" ]; then
-        acidev $1 && push
-    else
-        acidev && push
-    fi
-}
-
 function bdm() {
     read -p "Deletes all branches that have been merged with master & develop. Proceed? [Y/n]" ans
     if [[ $ans =~ "[yY]" ]] || [[ -z $ans ]]; then
@@ -50,15 +34,6 @@ function begone_thots() {
     | perl -lane 'print m/^[-\w\/\.]+?\s/g' \
     | xargs git branch -D \
     && no_cls $1
-}
-
-# Commits and pushes at once
-function cip() {
-    if [[ -z "$1" ]]; then
-        ci && push
-    else
-        ci -m "$1" && push
-    fi
 }
 
 function co() {
@@ -122,12 +97,23 @@ function dev() {
             "-s")
                 co develop && tug && no_cls $2
                 ;;
+            "-d")
+                del
+                ;;
             "-r")
                 local branch=$(git_current_branch)
                 co develop && tug && br -D $branch && co -b $branch
                 ;;
-            "-h" | *)
-                echo "$0 {-h|-s|-r}"
+            "-h")
+                echo "$0 {-h|-s|-d|-r}"
+                echo "-h: Displays this"
+                echo "-s: Checks out to dev, pulls, and stays in dev"
+                echo "-d: Does what -s does and deletes the previous branch"
+                echo "-r: Does what -r does, then recreates and checks out to the previous branch"
+                ;;
+            *)
+                echo "Undefined command $1"
+                dev -h
                 ;;
         esac
     fi
