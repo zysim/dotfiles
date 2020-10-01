@@ -118,6 +118,17 @@ echo "Git stuff set"
 ln -nfs $BASE/.vim_runtime ~/.vim_runtime
 . $BASE/.vim_runtime/install_awesome_vimrc.sh
 
+if [[ -d ~/.vim ]]; then
+  read -p "~/.vim already exists. You wanna wipe? [yN]" ans
+  if [[ $ans =~ ^[yY]$ ]]; then
+      rm -rf ~/.vim && ln -nfs $BASE/.vim ~/.vim
+      echo -e "\033[0;33m~/.vim linked from $BASE/.vim.\033[0m"
+  else
+      echo -e "\033[0;33mNot wiping ~/.vim.\033[0m"
+  fi
+fi
+
+
 # Check if curl's installed
 if ! [ -x "`command -v curl`" ]; then
   echo "Installing curl..."
