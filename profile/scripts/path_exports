@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-for f in $PROFILE_ROOT/scripts/paths/*; do
+cd $PROFILE_ROOT/scripts/paths
+for f in *; do
   if [[ -f $f ]]; then
     . "$f"
   fi
 done
+cd - > /dev/null

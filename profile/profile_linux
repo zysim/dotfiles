@@ -4,14 +4,18 @@ export DOTFILE_ROOT=~/.mine_dotfiles
 export ALIAS_ROOT=$DOTFILE_ROOT/aliases
 export PROFILE_ROOT=$DOTFILE_ROOT/profile
 
-# This needs to be called first
-. $PROFILE_ROOT/scripts/start
+cd $PROFILE_ROOT/scripts
 
-for f in $PROFILE_ROOT/scripts/*; do
-  if [[ -f "$f" ]]; then
+# This needs to be called first
+. start
+
+for f in *; do
+  if [[ -f "$f" && ! "$f" =~ start ]]; then
     . "$f"
   fi
 done
+
+cd - > /dev/null
 
 if [[ ! $(uname -v) =~ Microsoft && -f ~/.local/bin/virtualenvwrapper.sh ]]; then
   . ~/.local/bin/virtualenvwrapper.sh >/dev/null
