@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # These are scripts that both machines have to run at the start
 
 export CLICOLOR=true

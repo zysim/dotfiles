@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 if [[ $PATH != *$HOME/.config/composer/vendor/bin* ]]; then
     export PATH=$PATH:$HOME/.config/composer/vendor/bin
-fi 
+fi

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 
 export DOTFILE_ROOT=~/.mine_dotfiles
 export ALIAS_ROOT=$DOTFILE_ROOT/bash_aliases

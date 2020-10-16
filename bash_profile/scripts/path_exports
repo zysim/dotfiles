@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 for f in $PROFILE_ROOT/scripts/paths/*; do
   if [[ -f $f ]]; then
     . "$f"

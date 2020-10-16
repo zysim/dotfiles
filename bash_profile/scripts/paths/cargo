@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 if [[ $PATH != *$HOME/.cargo/bin* ]]; then
     export PATH=$HOME/.cargo/bin:$PATH
 fi

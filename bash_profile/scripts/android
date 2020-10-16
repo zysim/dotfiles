@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Path exports for Android Studio to work
 
 OS=$(uname -s)

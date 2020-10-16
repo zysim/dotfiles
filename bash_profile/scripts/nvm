@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Source NVM
 if [[ -f '.nvmrc' ]]; then
     echo -e "${LG}.nvmrc found. Calling nvm use...${NC}"
@@ -12,7 +12,7 @@ if [[ -f '.nvmrc' ]]; then
         else
             echo "NVM directory not found. Do you have it installed?"
         fi
-    else 
+    else
         nvm use
         cls
     fi
