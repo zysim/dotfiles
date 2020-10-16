@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Forces natural scrolling
+
+xinput set-prop "USB Optical Mouse" "libinput Natural Scrolling Enabled" 1
