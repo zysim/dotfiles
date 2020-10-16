@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Script colours
 NC="\033[0m"
 R="\033[0;31m"

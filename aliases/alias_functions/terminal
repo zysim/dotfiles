@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Terminal aliases
 alias cls='clear && printf "\e[3J"'
 alias rm="rm -i"

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # IB aliases
 # This is for work at Radweb. Once I'm outta this place then just delete this
 alias ib='cd_and_nvm ~/Documents/Work/InventoryBase'

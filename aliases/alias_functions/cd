@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # This is for cd-ing to usual locations
 alias personal="cd ~/Documents/Personal"
 alias work="cd ~/Documents/Work"

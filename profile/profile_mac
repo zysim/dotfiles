@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 export DOTFILE_ROOT=~/.mine_dotfiles
-PROFILE_ROOT=$DOTFILE_ROOT/bash_profile
+PROFILE_ROOT=$DOTFILE_ROOT/profile
 
 . $PROFILE_ROOT/scripts/start
 

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 BASE=~/.mine_dotfiles
 OS=
 ARC=$(uname -m)

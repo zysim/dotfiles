@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 function fuckin_pen() {
     id=$(xsetwacom --list devices | perl -nle 'print $1 if /id: (\d{2})\s+type: STYLUS/')
     xsetwacom set $id MapToOutput 'HDMI-2'

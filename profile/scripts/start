@@ -4,8 +4,8 @@
 export CLICOLOR=true
 
 # Load Aliases
-if [[ -e $DOTFILE_ROOT/bash_aliases/aliases ]]; then
-    . $DOTFILE_ROOT/bash_aliases/aliases
+if [[ -e $ALIAS_ROOT/aliases ]]; then
+    . $ALIAS_ROOT/aliases
 fi
 
 # set PATH so it includes user's private bin if it exists

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 function install_node() {
     if [[ "$1" =~ InventoryBase-Go-RN$ ]]; then
         yarn

@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Initial stuff. Gotta have em here at the start.
 alias mine="cd $DOTFILE_ROOT"
 
@@ -6,6 +6,6 @@ alias mine="cd $DOTFILE_ROOT"
 alias please='sudo '
 
 # Source aliases
-for f in $DOTFILE_ROOT/bash_aliases/alias_functions/*; do
+for f in $ALIAS_ROOT/alias_functions/*; do
     . "$f"
 done

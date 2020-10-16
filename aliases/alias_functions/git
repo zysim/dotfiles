@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 # Git aliases
 alias acip='add && cip'
 alias add='git add .'
