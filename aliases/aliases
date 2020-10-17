@@ -8,6 +8,6 @@ alias please='sudo '
 # Source aliases
 cd $ALIAS_ROOT/alias_functions
 for f in *; do
-    . "$f"
+    . "./$f"
 done
 cd - > /dev/null

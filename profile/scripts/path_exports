@@ -2,7 +2,7 @@
 cd $PROFILE_ROOT/scripts/paths
 for f in *; do
   if [[ -f $f ]]; then
-    . "$f"
+    . "./$f"
   fi
 done
 cd - > /dev/null

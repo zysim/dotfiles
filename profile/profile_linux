@@ -7,11 +7,11 @@ export PROFILE_ROOT=$DOTFILE_ROOT/profile
 cd $PROFILE_ROOT/scripts
 
 # This needs to be called first
-. start
+. ./start
 
 for f in *; do
   if [[ -f "$f" && ! "$f" =~ start ]]; then
-    . "$f"
+    . "./$f"
   fi
 done
 
