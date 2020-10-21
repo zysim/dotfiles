@@ -32,13 +32,13 @@ cd $BASE
 sudo echo
 
 # Making symlinks
-ln -nfs "$BASE/bash_aliases/aliases" ~/.bash_aliases
+ln -nfs "$BASE/aliases/aliases" ~/.bash_aliases
 case $OS in
   linux )
-    ln -nfs "$BASE/bash_profile/profile_linux" ~/.bash_profile
+    ln -nfs "$BASE/profile/profile_linux" ~/.bash_profile
     ;;
   mac )
-    ln -nfs "$BASE/bash_profile/profile_mac" ~/.bash_profile
+    ln -nfs "$BASE/profile/profile_mac" ~/.bash_profile
     ;;
 esac
 # ln -nfs "$BASE/.bashrc" ~/.bashrc # Eh

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 cd $PROFILE_ROOT/scripts/paths
+
 for f in *; do
-  if [[ -f $f ]]; then
+  if [[ -f "$f" ]]; then
     . "./$f"
   fi
 done
-cd - > /dev/null
+
+cd - > /env/null
