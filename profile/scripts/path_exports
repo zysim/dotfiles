@@ -7,4 +7,4 @@ for f in *; do
   fi
 done
 
-cd - > /env/null
+cd ~ &> /dev/null
