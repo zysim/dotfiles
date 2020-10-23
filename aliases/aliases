@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 # Initial stuff. Gotta have em here at the start.
 alias mine="cd $DOTFILE_ROOT"
 
@@ -10,4 +11,5 @@ cd $ALIAS_ROOT/alias_functions
 for f in *; do
     . "./$f"
 done
-cd ~ &> /dev/null
+
+cd - &> /dev/null

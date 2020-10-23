@@ -4,6 +4,7 @@ export DOTFILE_ROOT=~/.mine_dotfiles
 export ALIAS_ROOT=$DOTFILE_ROOT/aliases
 export PROFILE_ROOT=$DOTFILE_ROOT/profile
 
+ori=$(pwd)
 cd $PROFILE_ROOT/scripts
 
 # This needs to be called first
@@ -15,7 +16,7 @@ for f in *; do
   fi
 done
 
-cd ~
+cd $ori
 
 if [[ ! $(uname -v) =~ Microsoft && -f ~/.local/bin/virtualenvwrapper.sh ]]; then
   . ~/.local/bin/virtualenvwrapper.sh >/dev/null
