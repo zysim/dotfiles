@@ -30,7 +30,7 @@ function cd_and_nvm {
     local nvm_version=$(cat .nvmrc)
     local depth=$(grep -o '\.' <<< $nvm_version | wc -l)
     local current_node_version=$(node -v)
-    current_node_version=${current_node_version#v}
+    current_node_version=${current_node_version}
 
     if [[ $nvm_version != $current_node_version ]]; then
         if [[ $depth =~ "2" ]]; then

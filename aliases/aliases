@@ -7,9 +7,8 @@ alias mine="cd $DOTFILE_ROOT"
 alias please='sudo '
 
 # Source aliases
-cd $ALIAS_ROOT/alias_functions
+cd ~/.mine_dotfiles/aliases/alias_functions
 for f in *; do
     . "./$f"
 done
-
 cd - &> /dev/null

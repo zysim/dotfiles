@@ -2,6 +2,7 @@
 
 export DOTFILE_ROOT=~/.mine_dotfiles
 PROFILE_ROOT=$DOTFILE_ROOT/profile
+export ALIAS_ROOT=$DOTFILE_ROOT/aliases
 
 . $PROFILE_ROOT/scripts/start
 
