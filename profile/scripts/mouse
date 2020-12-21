@@ -2,3 +2,4 @@
 # Forces natural scrolling
 
 xinput set-prop "USB Optical Mouse" "libinput Natural Scrolling Enabled" 1
+xinput set-prop "USB Optical Mouse" "libinput Accel Speed" -0.76
