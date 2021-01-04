@@ -47,6 +47,6 @@ function kickstart() {
     esac
 }
 
-alias launch_emulator='emulator @Nexus_5X_API_27'
+alias launch_emulator='emulator @$(emulator -list-avds | head -n 1)'
 
 export REACT_EDITOR=vim

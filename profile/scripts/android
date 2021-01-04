@@ -4,14 +4,24 @@
 OS=$(uname -s)
 case $OS in
     [lL]inux* )
-        export ANDROID_HOME=$HOME/Android/Sdk
+        ANDROID_HOME=$HOME/Android/Sdk
         ;;
     [dD]arwin* )
-        export ANDROID_HOME=$HOME/Library/Android
+        ANDROID_HOME=$HOME/Library/Android
+        export ANDROID_SDK_ROOT=~/Library/Android/sdk
+        export ANDROID_AVD_HOME=~/.android/avd
         ;;
 esac
 
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=$PATH:$ANDROID_HOME/tools/bin
+if [[ $PATH != *$ANDROID_HOME/emulator* ]]; then
+    export PATH=$PATH:$ANDROID_HOME/emulator
+fi
+
+if [[ $PATH != *$ANDROID_HOME/platform-tools* ]]; then
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
+fi
+
+if [[ $PATH != *$ANDROID_SDK_ROOT/cmdline-tools/latest/bin* ]]; then
+    export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+fi
+
