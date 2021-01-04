@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-cd $PROFILE_ROOT/scripts/paths
+cd ~/.mine_dotfiles/profile/scripts/paths
 
 for f in *; do
   if [[ -f "$f" ]]; then

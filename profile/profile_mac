@@ -6,9 +6,6 @@ export ALIAS_ROOT=$DOTFILE_ROOT/aliases
 
 . $PROFILE_ROOT/scripts/start
 
-# Source Android
-. $PROFILE_ROOT/scripts/android
-
 # Source NVM
 . $PROFILE_ROOT/scripts/nvm
 
@@ -20,6 +17,9 @@ export ALIAS_ROOT=$DOTFILE_ROOT/aliases
 
 # Source no_cls
 . $PROFILE_ROOT/scripts/no_cls
+
+# Export paths
+. $PROFILE_ROOT/scripts/path_exports
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

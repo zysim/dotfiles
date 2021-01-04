@@ -17,11 +17,11 @@ if [[ $PATH != *$ANDROID_HOME/emulator* ]]; then
     export PATH=$PATH:$ANDROID_HOME/emulator
 fi
 
-if [[ $PATH != *$ANDROID_HOME/platform-tools* ]]; then
-    export PATH=$PATH:$ANDROID_HOME/platform-tools
+if [[ $PATH != *$ANDROID_SDK_ROOT/tools/bin* ]]; then
+    export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
 fi
 
-if [[ $PATH != *$ANDROID_SDK_ROOT/cmdline-tools/latest/bin* ]]; then
-    export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
+if [[ $PATH != *$ANDROID_HOME/platform-tools* ]]; then
+    export PATH=$PATH:$ANDROID_HOME/platform-tools
 fi
 
