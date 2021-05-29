@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # ls aliases
-alias ll="ls -ahl"
+# alias ll="ls -ahl"
+alias ll="ls -a1F"
 alias l="ls -AF"

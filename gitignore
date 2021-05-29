@@ -6,6 +6,6 @@ TODO
 # For IBR
 meta.json
 Router.js
-~/.mine_dotfiles/profile/scripts/secret
+profile/scripts/secret
 node_modules
 secret_aliases
