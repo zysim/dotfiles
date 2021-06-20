@@ -28,12 +28,16 @@ function bdm() {
 
 # Delete local branches which remotes have been deleted
 function begone_thots() {
-    git branch -v \
-    | grep -E '\[gone\]' \
-    | cut -c 3- \
-    | perl -lane 'print m/^[-\w\/\.]+?\s/g' \
-    | xargs git branch -D \
-    && no_cls $1
+    if [[ $1 =~ "-h" ]]; then
+        echo "Deletes local branches which remotes have been deleted"
+    else
+       git branch -v \
+        | grep -E '\[gone\]' \
+        | cut -c 3- \
+        | perl -lane 'print m/^[-\w\/\.]+?\s/g' \
+        | xargs git branch -D \
+        && no_cls $1
+    fi
 }
 
 function co() {
@@ -53,7 +57,9 @@ function co() {
 
 # Shorthand to checkout to a new branch from another
 function cob() {
-    if [[ -z "$1" ]]; then
+    if [[ $1 =~ "-h" ]]; then
+        echo "Shorthand to checkout to a new branch from another, if second argument is specified. Otherwise, checks out from the current branch."
+    elif [[ -z "$1" ]]; then
         echo "Please specify a new branch name."
     else
         if [[ -z "$2" ]]; then
