@@ -1,6 +1,10 @@
 #!/usr/bin/env bash
 # Path exports for Android Studio to work
 
+if [[ -z `command -v android-studio` ]]; then
+    return
+fi
+
 OS=$(uname -s)
 case $OS in
     [lL]inux* )
@@ -10,6 +14,9 @@ case $OS in
         ANDROID_HOME=$HOME/Library/Android
         export ANDROID_SDK_ROOT=~/Library/Android/sdk
         export ANDROID_AVD_HOME=~/.android/avd
+        if [[ $PATH != *$ANDROID_SDK_ROOT/tools/bin* ]]; then
+            export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
+        fi
         ;;
 esac
 
@@ -17,11 +24,6 @@ if [[ $PATH != *$ANDROID_HOME/emulator* ]]; then
     export PATH=$PATH:$ANDROID_HOME/emulator
 fi
 
-if [[ $PATH != *$ANDROID_SDK_ROOT/tools/bin* ]]; then
-    export PATH=$PATH:$ANDROID_SDK_ROOT/tools/bin
-fi
-
 if [[ $PATH != *$ANDROID_HOME/platform-tools* ]]; then
     export PATH=$PATH:$ANDROID_HOME/platform-tools
 fi
-
