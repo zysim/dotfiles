@@ -5,6 +5,6 @@ if [[ ! `uname -s` =~ "[lL]inux" ]]; then
     return
 fi
 
-if [[ $PATH != "*/home/shep/.local/cmdline-tools/bin*" ]]; then
-    export PATH=$PATH:~/.local/cmdline-tools/bin
+if [[ $PATH != "*/home/shep/.local/android-studio/cmdline-tools/bin*" ]]; then
+    export PATH=$PATH:~/.local/android-studio/cmdline-tools/bin
 fi
