@@ -5,9 +5,9 @@ if [[ ! `command -v gem` ]]; then
     return
 fi
 
-if [[ $PATH != *$HOME/gems/bin* ]]; then
-    export PATH=$PATH:$HOME/gems/bin
-fi
+. ../../utils/addToPath.sh $HOME/gems/bin
 
-# Install Ruby Gems to ~/gems
-export GEM_HOME="$HOME/gems"
+if [[ -z "$GEM_HOME" ]]; then
+    # Install Ruby Gems to ~/gems
+    export GEM_HOME="$HOME/gems"
+fi

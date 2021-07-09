@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
-if [[ $PATH != *$HOME/.config/composer/vendor/bin* ]]; then
-    export PATH=$PATH:$HOME/.config/composer/vendor/bin
+
+if [[ ! `command -v composer` ]]; then
+    return
 fi
+
+. ../../utils/addToPath.sh $HOME/.config/composer/vendor/bin

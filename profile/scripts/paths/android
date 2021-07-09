@@ -20,10 +20,5 @@ case $OS in
         ;;
 esac
 
-if [[ $PATH != *$ANDROID_HOME/emulator* ]]; then
-    export PATH=$PATH:$ANDROID_HOME/emulator
-fi
-
-if [[ $PATH != *$ANDROID_HOME/platform-tools* ]]; then
-    export PATH=$PATH:$ANDROID_HOME/platform-tools
-fi
+. ../../utils/addToPath.sh $ANDROID_HOME/emulator
+. ../../utils/addToPath.sh $ANDROID_HOME/platform-tools
