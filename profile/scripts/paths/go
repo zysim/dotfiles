@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
 # Path export for Go
 
-if [[ ! `command -v go` ]]; then
-    return
-fi
-
 . ../../utils/addToPath.sh /usr/local/go/bin
