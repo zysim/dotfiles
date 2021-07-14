@@ -125,6 +125,25 @@ function dev() {
     fi
 }
 
+function sync_with_fork() {
+    if [[ $1 == "-h" ]]; then
+        echo -e "${LY}sync_with_fork:${NC} Syncs my forked repo's master with the original repo's master"
+        echo "Make sure you have a remote called upstream before using this function."
+        echo "Define it like so: git remote add upstream https://<repo>.git"
+        return
+    fi
+    git fetch upstream 2> /dev/null
+    if [[ $? == 0 ]]; then
+        local ori=$(git_current_branch)
+        [ $ori != master ] && co master
+        git rebase upstream/master
+        discharge --no-cls
+        [ $ori != master ] && co $ori
+    else
+        echo -e "${LR}Upstream remote doesn't exist. Set it first.${NC}"
+    fi
+}
+
 function git_relative_remote_branch() {
     git rev-parse --abbrev-ref --symbolic-full-name @{u} \
     | perl -lane "print m/^$(git remote)\/(.+?)$/" \
